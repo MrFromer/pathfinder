@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Логин</title>
+    <link rel="stylesheet" href="mysite.css">
+    <link rel="stylesheet" href="http://www.htmlbook.ru/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    
+  </head>
+  <body bgcolor="#F5DEB3" link="#8B4513" vlink="#A52A2A"> 
+    <form action="" method="post">
+      {% csrf_token %}
+      <!-- as_p для того, чтобы каждый элемент формы был с новой строки -->
+     
+
+      
+      
+      <font size="10"><center> <div style="margin-top: 300px";>
+            <font size="5"><h1>Авторизация</h1></font>
+            
+            <div class="form-row">
+                <input type="text" name="username" id="your-username" class="input-text" placeholder="Логин" required>
+            </div>
+            <div class="form-row">
+                <input type="password" name="password" id="password" class="input-text" placeholder="Пароль" required>
+            </div>
+            <button type="submit">Войти</button>
+            {% if form.errors %}
+            <font size="5"><p>Введён не верный логин или пароль</p></font>
+            {% endif %}
+      </div></center></font>
+      
+      
+
+
+
+
+    </form>
+  </body>
+</html>

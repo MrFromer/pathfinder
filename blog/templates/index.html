@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Страница выбора</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="mysite.css">
+    <link rel="stylesheet" href="http://www.htmlbook.ru/main.css">
+</head>
+<body bgcolor="#F5DEB3" link="#8B4513" vlink="#A52A2A"> 
+    <center><p><img src="https://static.wikia.nocookie.net/rpg/images/8/80/Pathfinder_RPG.png/revision/latest/scale-to-width-down/1000?cb=20100606105213&path-prefix=ru" alt="Лого pathfiner"  width="800" height="200" style="margin-top: 100px;"> </p></center>
+    {% if user.is_authenticated %}
+        <font face="Lobster" size="20" color="#D2B48C"> <p align="center"> <a href="http://127.0.0.1:8000/page_choice/">Персонажи</a> </p> </font>
+        <font face="Lobster" size="20" color="#D2B48C"> <p align="center"> <a href="http://127.0.0.1:8000/users/logout/">Выход</a> </p> </font>
+    {% else %}
+        <font face="Lobster" size="20" color="#D2B48C"> <p align="center"> <a title='Регистрация нового аккаунта'class="p-2 text-dark" href="http://127.0.0.1:8000/users/register">Регистрация</a> </p> </font>
+        <font face="Lobster" size="20" color="#D2B48C"> <p align="center"> <a title='Вход в аккаунт'href="http://127.0.0.1:8000/users/login/" >Вход</a> </p> </font>
+    {% endif %}
+
+    <font face="Lobster" size="20" color="#D2B48C"> <p align="center"> <a title='О приложении' href="http://127.0.0.1:8000/about_site"> О приложении</a> </p> </font>
+</body>
+</html>
