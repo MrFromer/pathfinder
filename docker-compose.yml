@@ -12,6 +12,9 @@ services:
       context: .
       dockerfile: Dockerfile
     restart: always
+    
+  nginx:
+    image: nginx:1.19.3
     volumes:
       - static_value:/code/static_backend/
       - media_value:/code/media_backend/
