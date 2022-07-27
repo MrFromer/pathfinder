@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="main.css"type="text/css/">
     <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
 </head>
-<body bgcolor="#F5DEB3" link="#8B4513" vlink="#A52A2A" style="height:10000px" > 
+<body bgcolor="#F5DEB3" link="#8B4513" vlink="#A52A2A" style="height:2000px" > 
     <!--<div><img src="https://static.wikia.nocookie.net/rpg/images/8/80/Pathfinder_RPG.png/revision/latest/scale-to-width-down/1000?cb=20100606105213&path-prefix=ru" alt="Лого pathfiner"  width="400" height="150" style="margin: 0px"> </div>
         
     <!--<h1>{{form.date}}<h2>-->
@@ -215,6 +215,13 @@
             right:580px;
             bottom:1730px;      
         }
+        .table_eighteenth{
+            position: relative;
+            margin: 0px auto;
+            right:160px;
+            bottom:3705px;      
+        }
+        
                
         
 @media screen and (max-width:800px){
@@ -1103,6 +1110,96 @@
                     <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_25}} </td> </tr> 
                     <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_26}} </td> </tr> 
                 </table>
+
+            <table class="table_eighteenth"> <!-- ЗАКЛИНАНИЯ-->
+                <tr> <!--<th colspan="5"><h1 class="sagolovok" style="width:300px; height:50px;" > <small> ЗАКЛИНАНИЯ </h1></th> </tr>-->
+                    <caption style="background: black; color: white; height:50px; width:"> <h2 style="align: center; margin-top:10px">ЗАКЛИНАНИЯ</caption>
+                <tr>
+                    <th><h6>ИЗВЕСТНЫЕ <br> ЗАКЛИНАНИЯ</th> <th><h6>СЛ<br>ИСПЫТАНИЯ</th> <th><h6> <b>КРУГ</b></th> <th><h6>ЗАКЛИНАНИЙ <br> В ДЕНЬ</th> <th><h6>ДОП. <br> ЗАКЛИНАНИЯ</th>
+                </tr>
+                <tr>
+                    <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_known_lvl0}} </td>
+                    <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spell_save_dc_lvl0}} </td>
+                    <td> 0 </td>
+                    <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_per_day_lvl0}} </td>
+                    <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_bonus_lvl0}} </td>
+                </tr>
+                <tr>
+                    <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_known_lvl1}} </td>
+                    <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spell_save_dc_lvl1}} </td>
+                    <td> 1 </td>
+                    <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_per_day_lvl1}} </td>
+                    <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_bonus_lvl1}} </td>
+                </tr>
+                <tr>
+                    <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_known_lvl2}} </td>
+                    <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spell_save_dc_lvl2}} </td>
+                    <td> 2 </td>
+                    <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_per_day_lvl2}} </td>
+                    <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_bonus_lvl2}} </td>
+                </tr>
+                <tr>
+                    <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_known_lvl3}} </td>
+                    <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spell_save_dc_lvl3}} </td>
+                    <td> 3 </td>
+                    <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_per_day_lvl3}} </td>
+                    <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_bonus_lvl3}} </td>
+                </tr>
+                <tr>
+                    <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_known_lvl4}} </td>
+                    <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spell_save_dc_lvl4}} </td>
+                    <td> 4 </td>
+                    <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_per_day_lvl4}} </td>
+                    <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_bonus_lvl4}} </td>
+                </tr>
+                <tr>
+                    <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_known_lvl5}} </td>
+                    <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spell_save_dc_lvl5}} </td>
+                    <td> 5 </td>
+                    <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_per_day_lvl5}} </td>
+                    <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_bonus_lvl5}} </td>
+                </tr>
+                <tr>
+                    <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_known_lvl6}} </td>
+                    <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spell_save_dc_lvl6}} </td>
+                    <td> 6 </td>
+                    <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_per_day_lvl6}} </td>
+                    <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_bonus_lvl6}} </td>
+                </tr>
+                <tr>
+                    <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_known_lvl7}} </td>
+                    <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spell_save_dc_lvl7}} </td>
+                    <td> 7 </td>
+                    <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_per_day_lvl7}} </td>
+                    <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_bonus_lvl7}} </td>
+                </tr>
+                <tr>
+                    <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_known_lvl8}} </td>
+                    <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spell_save_dc_lvl8}} </td>
+                    <td> 8 </td>
+                    <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_per_day_lvl8}} </td>
+                    <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_bonus_lvl8}} </td>
+                </tr>
+                <tr>
+                    <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_known_lvl9}} </td>
+                    <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spell_save_dc_lvl9}} </td>
+                    <td> 9 </td>
+                    <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_per_day_lvl9}} </td>
+                    <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_bonus_lvl9}} </td>
+                </tr>
+                <tr>
+                    <td colspan="5" ><input type="text" class="input" size="2" style="width:300px;" placeholder="МОДИФИКАТОРЫ ОБСТОЯТЕЛЬСТВ"id={{form.conditional_modifiers}} </td>
+                </tr>
+            <table class="table_ninteent"> <!-- СФЕРЫ/СПЕЦИАЛИЗАЦИЯ В ШКОЛЕ--> 
+                <tr> 
+                    <caption style=" color:black; "> <h2>СФЕРЫ/СПЕЦИАЛИЗАЦИЯ В ШКОЛЕ</caption>
+                <tr>
+                    
+
+
+
+                    
+
             
 </div>
 </section>
