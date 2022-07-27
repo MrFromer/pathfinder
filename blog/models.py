@@ -722,4 +722,11 @@ class character(models.Model):
     money_PM =  models.CharField(blank=True, null = True, max_length=255)
     experience =  models.CharField(blank=True, null = True, max_length=255)
     following_experience =  models.CharField(blank=True, null = True, max_length=255)
+    #other under equipment
+    light_load =  models.CharField(blank=True, null = True, max_length=255) 
+    middle_load =  models.CharField(blank=True, null = True, max_length=255) 
+    hight_load =  models.CharField(blank=True, null = True, max_length=255) 
+    raise_above_head =  models.CharField(blank=True, null = True, max_length=255) 
+    get_off_the_ground =  models.CharField(blank=True, null = True, max_length=255) 
+    push_or_drag =  models.CharField(blank=True, null = True, max_length=255) 
 
