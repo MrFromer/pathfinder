@@ -121,4 +121,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_backend')
-ALLOWED_HOSTS = 'localhost', '127.0.0.1', 'backend', '51.250.6.239', '10.128.0.21'
+ALLOWED_HOSTS = 'localhost', '127.0.0.1', 'backend', '84.201.185.178'
