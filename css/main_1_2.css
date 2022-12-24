@@ -1,0 +1,73 @@
+.body {
+    background: #ff1
+    
+  } 
+.header {
+    font-family: Lobster ;
+}  
+.tableparams_three {
+  position: relative;
+  margin: 0px auto;
+  bottom: 340px; 
+  right: 410px;
+  }
+  .inich {
+  background: black;
+  color: white;
+  padding: 2px;
+  width: 135px;
+  height: 40px;
+  margin: 0m 0em 0em 0em;
+  align="center"
+  }
+      
+  .input_initiative {    
+  margin: 1.8em 0.2em 0em 0em;
+  height:30px;
+  
+  } 
+  .tableparams_four {
+  position: relative;
+  margin: 0px auto;
+  right:613px;
+  bottom:365px;
+  }  
+  .input {
+  margin: 0.2em 0.2em 0.2em 0.2em;
+  height:30px;   
+  }
+  .tableparams_five{
+  position: relative;
+  margin: 0px auto;
+  right:580px;
+  bottom:370px;    
+  }
+
+  .tableparams_six{
+  position: relative;
+  margin: 0px auto;
+  right:585px;
+  bottom:375px; 
+  
+  }
+  .sagolovok{
+  background: black;
+  color: white;
+  padding: 2px;
+  width: 120px;
+  height: 40px;
+  margin: 0em 0em 0em 0em;
+  align="center"
+  }
+  .tableparams_seven{
+  position: relative;
+  margin: 0px auto;
+  right:729px;
+  bottom:355px; 
+  }
+  .tableparams_eight{
+  position: relative;
+  margin: 0px auto;
+  right:685px;
+  bottom:355px; 
+  }

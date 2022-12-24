@@ -1,5 +1,6 @@
 
 from urllib import request
+from venv import create
 from django.shortcuts import render, redirect
 from .models import character
 from .forms import CharacterForm
@@ -11,18 +12,29 @@ from django.shortcuts import get_list_or_404, get_object_or_404
 
 #страница abc 
 @csrf_exempt
-def saveforms (request):
+def saveforms (request, id=None):
     
     form = CharacterForm(request.POST or None)
+    context = {'id': None}   
     if request.method=="POST" and form.is_valid():
         #a = character.objects.get()
         a = form.save(commit=False)
         auto_correct(a) #передаёт значения из формы в функции автоподсчёта
         a.author = request.user
         a.save()
+        context = {
+        'id' : a.id,
+        'form': form,
+        }   
+        print(a.id, 'АААААААААААААААААААААААААА')
+        #if id==None:
+            #redirect('edit')
         return redirect("saveforms")
-    return render(request,"./main.html", {'form': form})
-
+        
+    if context:
+        return render(request,"main.html", context )
+    else:
+        return render(request,"main.html" )    
 
 #основная страница
 def index (request):
@@ -40,7 +52,6 @@ def list(request):
     person = character.objects.filter( author = request.user)
     return render(request, 'list.html', {'person': person})
 
-
 #изменение персонажа
 def edit(request, id):
     character_edit = get_object_or_404(character, id=id)
@@ -54,9 +65,44 @@ def edit(request, id):
     character_edit = get_object_or_404(character, id=id)
     form = CharacterForm(instance=character_edit)
     context = {
+        'id' : id,
         'form': form,
     }    
     return render(request, "main.html", context)
+    
+#изменение персонажа вторая страница
+def edit_1_2(request, id):
+    character_edit = get_object_or_404(character, id=id)
+    if character_edit.author != request.user:
+        return redirect('index')
+    form = CharacterForm(request.POST or None, instance=character_edit)
+    if form.is_valid():
+        form.save(commit=False)
+        auto_correct(form.instance)
+        form.save()
+    character_edit = get_object_or_404(character, id=id)
+    form = CharacterForm(instance=character_edit)
+    context = {
+        'id' : id,
+        'form': form,
+    }    
+    return render(request, "main_1_2.html", context)
+#изменение персонажа третья страница
+def edit_1_3(request, id):
+    character_edit = get_object_or_404(character, id=id)
+    if character_edit.author != request.user:
+        return redirect('index')
+    form = CharacterForm(request.POST or None, instance=character_edit)
+    if form.is_valid():
+        form.save(commit=False)
+        auto_correct(form.instance)
+        form.save()
+    character_edit = get_object_or_404(character, id=id)
+    form = CharacterForm(instance=character_edit)
+    context = {
+        'form': form,
+    }    
+    return render(request, "main_1_3.html", context)    
 
 #о сайте
 def about_site(request):

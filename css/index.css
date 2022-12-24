@@ -1,0 +1,24 @@
+a{
+  color:#ffff;
+}
+.header{
+  display: flex;
+  justidy-content: space-between;
+  padding: 10px;
+  background: #689CD2;
+  color: #fff;
+  font-family: Times New Roman;
+}
+.header__section{
+  display:flex;
+  aling-items: center;
+}
+.header__item{
+  padding: 10px 15px;
+  font-size: 20px;
+  margin-left:5px;
+}
+.header_item:hover{
+  background-color: #FF9900;
+  border-radius: 4px;
+}

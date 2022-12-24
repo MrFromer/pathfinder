@@ -1,0 +1,362 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Страница заполнения</title>
+    <link rel="stylesheet" href="main.css"type="text/css/">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+</head>
+<body bgcolor="#F5DEB3" link="#8B4513" vlink="#A52A2A" style="height:6000px" > 
+    <!--<div><img src="https://static.wikia.nocookie.net/rpg/images/8/80/Pathfinder_RPG.png/revision/latest/scale-to-width-down/1000?cb=20100606105213&path-prefix=ru" alt="Лого pathfiner"  width="400" height="150" style="margin: 0px"> </div>
+        
+    <!--<h1>{{form.date}}<h2>-->
+   
+        <form  method="post">
+            
+        {% csrf_token%}
+
+
+
+
+
+
+
+ <table class="table_fourteen" cellspacing="2">
+            
+    <tr>
+        <th colspan="1" style="position:relative; right:-7px"><h4 class="sagolovok" style="width:130px; height:35px" > <small>ПРЕДМЕТЫ КБ </h4></th>
+        <th colspan="1" style="position:relative; right:-7px"><h2 class="sagolovok" style="width:130px; height:35px" >ТИП </h2></th>
+        <th colspan="1" style="position:relative; right:-7px"><h2 class="sagolovok" style="width:130px; height:35px" >БОНУС </h2></th>
+        <th colspan="1" style="position:relative; right:-7px"><h3 class="sagolovok" style="width:130px; height:38px "> <small >ШТРАФ <br> ЗА ДОСПЕХИ </h3></th>
+        <th colspan="1" style="position:relative; right:-7px"><h3 class="sagolovok" style="width:130px; height:38px" > <small>ПРОВАЛ<br> ЗАКЛИНАНИЯ </h3></th>
+        <th colspan="1" style="position:relative; right:-7px"><h2 class="sagolovok" style="width:130px; height:35px" >ВЕС </h2></th>
+        <th colspan="1" style="position:relative; right:-7px"><h2 class="sagolovok" style="width:130px; height:35px" >СВОЙСТВА </h2></th>
+    </tr>   
+    <tr>
+        <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.ac_items_one}} </td>
+        <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.bonus_one}} </td>
+        <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.type_one}} </td>
+        <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.check_penalty_one}} </td>
+        <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.spell_failure_one}} </td>
+        <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.weight_one}} </td>
+        <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.properties_one}} </td>
+    </tr>     
+    <tr>
+        <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.ac_items_two}} </td>
+        <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.bonus_two}} </td>
+        <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.type_two}} </td>
+        <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.check_penalty_two}} </td>
+        <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.spell_failure_two}} </td>
+        <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.weight_two}} </td>
+        <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.properties_two}} </td>
+    </tr> 
+    <tr>
+        <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.ac_items_three}} </td>
+        <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.bonus_three}} </td>
+        <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.type_three}} </td>
+        <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.check_penalty_three}} </td>
+        <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.spell_failure_three}} </td>
+        <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.weight_three}} </td>
+        <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.properties_three}} </td>
+    </tr>    
+    <tr>
+        <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.ac_items_four}} </td>
+        <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.bonus_four}} </td>
+        <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.type_four}} </td>
+        <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.check_penalty_four}} </td>
+        <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.spell_failure_four}} </td>
+        <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.weight_four}} </td>
+        <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.properties_four}} </td>
+    </tr>    
+    <tr>
+        <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.ac_items_five}} </td>
+        <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.bonus_five}} </td>
+        <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.type_five}} </td>
+        <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.check_penalty_five}} </td>
+        <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.spell_failure_five}} </td>
+        <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.weight_five}} </td>
+        <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.properties_five}} </td>
+    </tr>   
+    <tr>
+        <td colspan="1" style="position:relative; right:-10px" ><h2 class="sagolovok" style="width:130px; height:30x ">ИТОГО</h2></td>
+        <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.bonus_totals}} </td>
+        <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.type_totals}} </td>
+        <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.check_penalty_totals}} </td>
+        <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.spell_failure_totals}} </td>
+        <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.weight_totals}} </td>
+        <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.properties_totals}} </td>
+    </tr>        
+
+    <table class="table_fiftine">
+        <tr> 
+            <th colspan="2"><h1 class="sagolovok" style="width:300px; height:35px" > <small>СНАРЯЖЕНИЕ </h1></th>
+        </tr>     
+        <tr>
+            <th colspan="1"><h1 class="" style="width:120px; height:35px; position:relative; right:-15px; top:-10px" > <small>ПРЕДМЕТ </h1></th>   
+            <th colspan="1"><h1 class="" style="width:120px; height:35px; position:relative; right:-15px; top:-10px" > <small>ВЕС </h1></th>       
+        </tr>
+        <tr>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_1}} </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_1_ves}} </td>
+        </tr>
+        <tr>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_2}} </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_2_ves}} </td>
+        </tr>
+        <tr>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_3}} </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_3_ves}} </td>
+        </tr>
+        <tr>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_4}} </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_4_ves}} </td>
+        </tr>
+        <tr>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_5}} </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_5_ves}} </td>
+        </tr>
+        <tr>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_6}} </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_6_ves}} </td>
+        </tr>
+        <tr>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_7}} </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_7_ves}} </td>
+        </tr>
+        <tr>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_8}} </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_8_ves}} </td>
+        </tr>
+        <tr>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_9}} </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_9_ves}} </td>
+        </tr>
+        <tr>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_10}} </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_10_ves}} </td>
+        </tr>
+        <tr>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_11}} </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_11_ves}} </td>
+        </tr>
+        <tr>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_12}} </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_12_ves}} </td>
+        </tr>
+        <tr>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_13}} </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_13_ves}} </td>
+        </tr>
+        <tr>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_14}} </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_14_ves}} </td>
+        </tr>
+        <tr>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_15}} </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_15_ves}} </td>
+        </tr>
+        <tr>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_16}} </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_16_ves}} </td>
+        </tr>
+        <tr>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_17}} </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_17_ves}} </td>
+        </tr>
+        <tr>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_18}} </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_18_ves}} </td>
+        </tr>
+        <tr>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_19}} </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_19_ves}} </td>
+        </tr>
+        <tr>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_20}} </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_20_ves}} </td>
+        </tr>
+        <tr>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_21}} </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_21_ves}} </td>
+        </tr>
+        <tr>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_22}} </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_22_ves}} </td>
+        </tr>
+        <tr>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_23}} </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_23_ves}} </td>
+        </tr>
+        <tr>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_24}} </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_24_ves}} </td>
+        </tr>
+        <tr>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_25}} </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_25_ves}} </td>
+        </tr>
+        <tr>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_26}} </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_26_ves}} </td>
+        </tr>
+        <tr>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_27}} </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_27_ves}} </td>
+        </tr>
+        <tr>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_28}} </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_28_ves}} </td>
+        </tr>
+        <tr>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_29}} </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_29_ves}} </td>
+        </tr>
+        <tr>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_30}} </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_30_ves}} </td>
+        </tr>
+        <tr>
+            <th colspan="1"><h1 class="sagolovok" style="width:180px; height:35px; position:relative; right:-23px; " > <small>ОБЩИЙ ВЕС </h1></th>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_total}} </td>
+        </table>
+    <table class="table_sixtien">
+        <tr> <th colspan="1"><h1 class="sagolovok" style="width:400px; height:50px;" > <small>ЧЕРТЫ </h1></th> </tr>
+        <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.feats_1}} </td> </tr>
+        <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.feats_2}} </td> </tr>
+        <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.feats_3}} </td> </tr>
+        <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.feats_4}} </td> </tr>
+        <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.feats_5}} </td> </tr>
+        <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.feats_6}} </td> </tr>
+        <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.feats_7}} </td> </tr>
+        <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.feats_8}} </td> </tr>
+        <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.feats_9}} </td> </tr>
+        <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.feats_10}} </td> </tr>
+        <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.feats_11}} </td> </tr>
+        <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.feats_12}} </td> </tr>
+        <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.feats_13}} </td> </tr>
+        <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.feats_14}} </td> </tr>
+    </table>
+    <table class="table_seventen">
+        <tr> <th colspan="1"><h1 class="sagolovok" style="width:400px; height:50px;" > <small>ОСОБЫЕ СПОСОБНОСТИ </h1></th> </tr>
+            <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities}} </td> </tr>
+            <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_1}} </td> </tr>
+            <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_2}} </td> </tr>
+            <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_3}} </td> </tr>
+            <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_4}} </td> </tr>
+            <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_5}} </td> </tr>
+            <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_6}} </td> </tr>
+            <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_7}} </td> </tr>
+            <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_8}} </td> </tr>
+            <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_9}} </td> </tr>
+            <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_10}} </td> </tr>
+            <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_11}} </td> </tr>
+            <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_12}} </td> </tr>
+            <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_13}} </td> </tr>
+            <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_14}} </td> </tr>
+            <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_15}} </td> </tr>
+            <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_16}} </td> </tr>
+            <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_17}} </td> </tr>
+            <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_18}} </td> </tr>
+            <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_19}} </td> </tr>
+            <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_20}} </td> </tr>
+            <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_21}} </td> </tr>
+            <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_22}} </td> </tr>
+            <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_23}} </td> </tr>
+            <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_24}} </td> </tr> 
+            <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_25}} </td> </tr> 
+            <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_26}} </td> </tr> 
+        </table>
+
+    <table class="table_eighteenth"> <!-- ЗАКЛИНАНИЯ-->
+        <tr> <!--<th colspan="5"><h1 class="sagolovok" style="width:300px; height:50px;" > <small> ЗАКЛИНАНИЯ </h1></th> </tr>-->
+            <caption style="background: black; color: white; height:50px; width:"> <h2 style="align: center; margin-top:10px">ЗАКЛИНАНИЯ</caption>
+        <tr>
+            <th><h6>ИЗВЕСТНЫЕ <br> ЗАКЛИНАНИЯ</th> <th><h6>СЛ<br>ИСПЫТАНИЯ</th> <th><h6> <b>КРУГ</b></th> <th><h6>ЗАКЛИНАНИЙ <br> В ДЕНЬ</th> <th><h6>ДОП. <br> ЗАКЛИНАНИЯ</th>
+        </tr>
+        <tr>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_known_lvl0}} </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spell_save_dc_lvl0}} </td>
+            <td> 0 </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_per_day_lvl0}} </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_bonus_lvl0}} </td>
+        </tr>
+        <tr>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_known_lvl1}} </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spell_save_dc_lvl1}} </td>
+            <td> 1 </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_per_day_lvl1}} </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_bonus_lvl1}} </td>
+        </tr>
+        <tr>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_known_lvl2}} </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spell_save_dc_lvl2}} </td>
+            <td> 2 </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_per_day_lvl2}} </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_bonus_lvl2}} </td>
+        </tr>
+        <tr>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_known_lvl3}} </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spell_save_dc_lvl3}} </td>
+            <td> 3 </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_per_day_lvl3}} </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_bonus_lvl3}} </td>
+        </tr>
+        <tr>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_known_lvl4}} </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spell_save_dc_lvl4}} </td>
+            <td> 4 </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_per_day_lvl4}} </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_bonus_lvl4}} </td>
+        </tr>
+        <tr>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_known_lvl5}} </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spell_save_dc_lvl5}} </td>
+            <td> 5 </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_per_day_lvl5}} </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_bonus_lvl5}} </td>
+        </tr>
+        <tr>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_known_lvl6}} </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spell_save_dc_lvl6}} </td>
+            <td> 6 </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_per_day_lvl6}} </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_bonus_lvl6}} </td>
+        </tr>
+        <tr>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_known_lvl7}} </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spell_save_dc_lvl7}} </td>
+            <td> 7 </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_per_day_lvl7}} </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_bonus_lvl7}} </td>
+        </tr>
+        <tr>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_known_lvl8}} </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spell_save_dc_lvl8}} </td>
+            <td> 8 </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_per_day_lvl8}} </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_bonus_lvl8}} </td>
+        </tr>
+        <tr>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_known_lvl9}} </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spell_save_dc_lvl9}} </td>
+            <td> 9 </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_per_day_lvl9}} </td>
+            <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_bonus_lvl9}} </td>
+        </tr>
+        <tr>
+            <td colspan="5" ><input type="text" class="input" size="2" style="width:300px;" placeholder="МОДИФИКАТОРЫ ОБСТОЯТЕЛЬСТВ"id={{form.conditional_modifiers}} </td>
+        </tr>
+    <table class="table_ninteent"> <!-- СФЕРЫ/СПЕЦИАЛИЗАЦИЯ В ШКОЛЕ--> 
+        <tr> 
+            <caption style=" color:black; "> <h2>СФЕРЫ/СПЕЦИАЛИЗАЦИЯ В ШКОЛЕ</caption>
+        <tr>
+        <tr><td> <input style = "width:100px" type="text" class = "general-input"size="2" id={{form.worldview}} </td></tr>
+
+
+
+    <button style="position:relative; top:-5000px;">Сохранить</button> 
+   
+
+</body>
+</html>        
