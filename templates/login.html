@@ -3,18 +3,100 @@
   <head>
     <title>Логин</title>
     <link rel="stylesheet" href="mysite.css">
+    <link rel="stylesheet" type="text/css" href="D:\pathfinder\css\login.css">
     <link rel="stylesheet" href="http://www.htmlbook.ru/main.css">
     <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
     
   </head>
-  <body bgcolor="#F5DEB3" link="#8B4513" vlink="#A52A2A"> 
-    <form action="" method="post">
+
+  <body> 
+    
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family:sans-serif;
+        background: #A9A9A9;
+    }
+    .box {
+      
+      align-center: 
+      width: 300px;
+      padding: 40px;
+      position: absolute;
+      top: 10%;
+      left: 50%;
+      transform: translate(-50%, 50%);
+      background: #DCDCDC;
+      text-align: center;
+      border-radius: 25px;
+  }
+  .box h1{
+    color:black;
+    text-transform: uppercase;
+    font-weight: 500;
+
+  }
+  .box input[type = 'text'],.box input[type='password']{
+    border: 0;
+    background: none;
+    display:  block;
+    margin:  20px auto;
+    text-align: center;
+    border: 2px solid #fcfcfc;
+    padding: 14px 10px;
+    width: 200px;
+    outline: none;
+    color: black;
+    border-radius: 24px;
+    transition: 0.25;
+}
+.box input[type = 'text']:focus,.box input[type='password']:focus{
+  width: 280px;
+  border-color: black;
+}
+.box input[type= 'submit']{
+  border: 0;
+    background: none;
+    display:  block;
+    margin:  20px auto;
+    text-align: center;
+    border: 2px solid black;
+    padding: 14px 10px;
+    width: 200px;
+    outline: none;
+    color: #696969;
+    border-radius: 24px;
+    transition: 0.25;
+    cursor: pointer;
+}
+.box input[type= 'submit']:hover{
+  background:black;
+}
+@media (max-width: 992px) {
+  .box {
+      max-width: 150px;
+  }
+  .box input[type = 'text']:focus,.box input[type='password']:focus{
+      max-width: 140px;
+    }
+    .box input[type = 'text'],.box input[type='password']{
+      max-width: 100px;
+    }
+    .box input[type= 'submit']{
+      max-width: 100px;
+    }
+    
+    h1 {font-size:21px !important; line-height:30px !important;}
+}
+  </style>
+  <form class='box' action='' method='post'>
       {% csrf_token %}
       <!-- as_p для того, чтобы каждый элемент формы был с новой строки -->
      
 
       
-      
+      <!--
       <font size="10"><center> <div style="margin-top: 300px";>
             <font size="5"><h1>Авторизация</h1></font>
             
@@ -29,12 +111,15 @@
             <font size="5"><p>Введён не верный логин или пароль</p></font>
             {% endif %}
       </div></center></font>
+      -->
       
-      
-
-
-
-
-    </form>
+        <h1> Авторизация </h1>
+        <input type='text' name='username' autocomplete="on" placeholder='Логин'>
+        <input type='password' name='password' autocomplete="on" placeholder='Пароль'>
+        <input type='submit' name='' value='Отправить'>
+        {% if form.errors %}
+        <font size="5"><p>Введён не верный логин или пароль</p></font>
+        {% endif %}
+      </form>
   </body>
 </html>

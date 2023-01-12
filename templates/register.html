@@ -7,13 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
   </head>
   <body bgcolor="#F5DEB3" link="#8B4513" vlink="#A52A2A"> 
-
-
-
-
-
-
-
+    
     <!--<form action="" method="post">
       {% csrf_token %}
       
@@ -23,44 +17,107 @@
         </div></center></font>
     </form> -->
     <!-- as_p для того, чтобы каждый элемент формы был с новой строки -->
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family:sans-serif;
+        background: #A9A9A9;
+    }
+    .box {
+      
+      align-center: 
+      width: 300px;
+      padding: 40px;
+      position: absolute;
+      top: %;
+      left: 50%;
+      transform: translate(-50%, 50%);
+      background: #DCDCDC;
+      text-align: center;
+      border-radius: 25px;
+  }
+  .box h1{
+    color:black;
+    text-transform: uppercase;
+    font-weight: 500;
 
+  }
+  .box input[type = 'text'],.box input[type='password'],.box input[type='email']{
+    border: 0;
+    background: none;
+    display:  block;
+    margin:  20px auto;
+    text-align: center;
+    border: 2px solid #fcfcfc;
+    padding: 14px 10px;
+    width: 200px;
+    outline: none;
+    color: black;
+    border-radius: 24px;
+    transition: 0.25;
+}
+.box input[type = 'text']:focus,.box input[type='password']:focus,.box input[type='email']:focus{
+  width: 280px;
+  border-color: black;
+}
+.box input[type= 'submit']{
+  border: 0;
+    background: none;
+    display:  block;
+    margin:  20px auto;
+    text-align: center;
+    border: 2px solid black;
+    padding: 14px 10px;
+    width: 200px;
+    outline: none;
+    color: #696969;
+    border-radius: 24px;
+    transition: 0.25;
+    cursor: pointer;
+}
+.box input[type= 'submit']:hover{
+  background:black;
+}
+@media (max-width: 992px) {
+  .box {
+      max-width: 150px;
+      top: -20%;
+  }
+  .box input[type = 'text']:focus,.box input[type='password']:focus,.box input[type='email']:focus{
+      max-width: 140px;
+    }
+    .box input[type = 'text'],.box input[type='password'],.box input[type='email']{
+      max-width: 100px;
+    }
+    .box input[type= 'submit']{
+      max-width: 100px;
+    }
+    h1 {font-size:21px !important; line-height:30px !important;}
+    
+}
+  </style>
+    <form class='box' action="" method="post">
+      {% csrf_token %}
+
+    <h1>Регистрация</h1>
+      <input type="text" name="username"  autocomplete="on"  placeholder="Логин">
+      <input type="email" name="email" id="your-username" autocomplete="on"  placeholder="Email">
+      <input type="password" name="password1" id="password1" autocomplete="on"  placeholder="Пароль">
+      <input type="password" name="password2" id="password2" autocomplete="on"  placeholder="Подтвердить пароль">
+      <input type='submit' name='' value='Отправить'>
+    {% if form.errors %}
+    <font size="5" color="">Пароль должен содержать: цифры, особые знаки, верхний и нижний регистр, и состоять минимум из 8 символов! Так-же при повторном вводе, возможно вы ввели другой пароль</font>
+    {% endif %}
+  
+    </form>
+    
 
     
 
           
             
-            <form action="" method="post">
-              {% csrf_token %}
 
-            <font size="20"><center> <div style="margin-top: 250px";>  
-            <font size="5"><h1>Регистрация</h1></font> 
-            <font style="width:50px;"><p  style="font-size:20px"> 
-              Условия регистрации:
-              <br>-Имя пользователя: до 150 символов, только цифры, буквы и @/./+/-/_.
-              <br>-Ваш пароль не может быть слишком похож на другую вашу личную информацию.
-              <br>-Ваш пароль должен содержать не менее 8 символов.
-              <br>-Ваш пароль не может быть широко используемым паролем.
-              <br>-Ваш пароль не может быть полностью числовым.
-              <br>-Два поля пароля не совпадают.</p>
-            </font>
-            <div class="form-row">
-                <input type="email" name="email" id="your-username" autocomplete="on" class="input-text" placeholder="Почта" required>
-            </div>
-            <div class="form-row">
-                <input type="password" name="password1" id="password1" autocomplete="on" class="input-text" placeholder="Пароль" required>
-            </div>
-            <div class="form-row">
-              <input type="password" name="password2" id="password2" autocomplete="on" class="input-text" placeholder="Повторно пароль" required>
-          </div>
-            <button type="submit">Зарегистрироваться</button>
-          </form>
-          {% if form.errors %}
-            <font size="5" color="#FF0000"><p>Возможно вы ввели данные не верно данные! Проверьте соответствуют ли они условиям!
-              
-            </p></font>
-            {% endif %}
-          </div></center></font>
-            
       
 
 
