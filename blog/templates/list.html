@@ -1,17 +1,26 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8" />
-<title>Модели в Django</title>
-<link rel="stylesheet" href="mysite.css">
-<link rel="stylesheet" href="http://www.htmlbook.ru/main.css">
-<link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
-</head>
-<body bgcolor="#F5DEB3" link="#8B4513" vlink="#A52A2A">
-{% csrf_token %}
-{% for field in person %}
-<font face="Lobster" color="#D2B48C" ><p style="font-size: 30px"><a href="{% url 'edit' field.id %}"> {{ field.character_name }} </a> <b><sam>Дата изменения: {{field.date}}</sam></b> <b><sam>Дата создания: {{field.date_create}}</sam></b> </p> </font>
+{% extends 'index.html' %}
 
-{% endfor %}
-</body>
-</html>
+{% block title %} <title> Выбор персонажа </title> {% endblock %}
+
+{% block content %}
+
+  <div style='margin:1000px;'>
+    {% csrf_token %}
+    <div class="row" style='max-height:100px;'>
+        <div class="col-sm-6">
+            
+      {% for field in person %}
+          <div class="" style="width: 18rem; margin: 50px auto 0px auto" >
+            <img src="https://www.goha.ru/s/A:Ca/RS/FnwDDKvJR8.jpg" class="card-img-top" style='max-width:100px' alt="Лист заполнения">
+            <div class="card-body">
+              <h5 class="card-title">Имя персонажа: {{ field.character_name }} </h5>
+              <p class="card-text">Дата изменения: {{field.date}} <br>Дата создания: {{field.date_create}}</p>
+              <a href="{% url 'edit' field.id %}" class="btn btn-primary">Изменить персонажа</a>
+            </div>
+          </div>
+      {% endfor %}
+        </div>
+      </div>
+    </div>
+
+{% endblock %}

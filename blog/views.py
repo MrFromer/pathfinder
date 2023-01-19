@@ -7,6 +7,7 @@ from .forms import CharacterForm
 from django.views.decorators.csrf import csrf_exempt
 import random
 from django.shortcuts import get_list_or_404, get_object_or_404
+from django.views.generic import DeleteView
 
 
 
@@ -184,5 +185,7 @@ def auto_correct(a):
         a.srtength_ability_score = a.srtength_ability_score - 2
             
 
-            
-
+ #def delete(DeleteView):
+    #model = Articles
+    #success_url = '/'
+    #template_name = 'delete.html'

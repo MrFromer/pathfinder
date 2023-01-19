@@ -1,0 +1,12 @@
+{% extends 'index.html' %}
+{% block title %} Удаление персонажа {% endblock %}
+{% block content %}
+
+<p> абоба </p>
+    <div>
+        <form method="post">
+            {% csrf_token %}
+            <button type="sumbit">Удалить персонажа</button>
+        </form>
+    </div>
+{% endblock %}
