@@ -4,23 +4,28 @@
 
 {% block content %}
 
-  <div style='margin:1000px;'>
+  <div style='margin:;'>
     {% csrf_token %}
-    <div class="row" style='max-height:100px;'>
-        <div class="col-sm-6">
-            
+    
+      
       {% for field in person %}
-          <div class="" style="width: 18rem; margin: 50px auto 0px auto" >
-            <img src="https://www.goha.ru/s/A:Ca/RS/FnwDDKvJR8.jpg" class="card-img-top" style='max-width:100px' alt="Лист заполнения">
+      <div class="card mb-3" style="max-width: 23rem;  margin: 50px auto 0px auto">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="https://www.goha.ru/s/A:Ca/RS/FnwDDKvJR8.jpg" class="card-img-top" style='max-width:100px; position: absolute; top: 50%;  transform: translate(10%, -50%)   ; ' alt="Лист заполнения">
+          </div>
+          <div class="col-md-8">
             <div class="card-body">
-              <h5 class="card-title">Имя персонажа: {{ field.character_name }} </h5>
-              <p class="card-text">Дата изменения: {{field.date}} <br>Дата создания: {{field.date_create}}</p>
+              <h5 class="card-title">Имя персонажа: {{ field.character_name }}</h5>
+              <p class="card-text">Дата изменения: {{field.date}} <br> Дата создания: {{field.date_create}}</p>
               <a href="{% url 'edit' field.id %}" class="btn btn-primary">Изменить персонажа</a>
+              
             </div>
           </div>
-      {% endfor %}
         </div>
       </div>
-    </div>
+      {% endfor %}
+      
+    
 
 {% endblock %}
