@@ -27,11 +27,9 @@ def saveforms (request, id=None):
         'id' : a.id,
         'form': form,
         }   
-        print(a.id, 'АААААААААААААААААААААААААА')
         #if id==None:
             #redirect('edit')
         return redirect("saveforms")
-        
     if context:
         return render(request,"main.html", context )
     else:
