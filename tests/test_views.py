@@ -8,6 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 import random
 from django.shortcuts import get_list_or_404, get_object_or_404
 from django.views.generic import DeleteView
+#from django.test import TestCase
 
 
 
@@ -69,39 +70,39 @@ def edit(request, id):
     }    
     return render(request, "main.html", context)
     
-#изменение персонажа вторая страница (сейчас не актуальны)
-# def edit_1_2(request, id):
-#     character_edit = get_object_or_404(character, id=id)
-#     if character_edit.author != request.user:
-#         return redirect('index')
-#     form = CharacterForm(request.POST or None, instance=character_edit)
-#     if form.is_valid():
-#         form.save(commit=False)
-#         auto_correct(form.instance)
-#         form.save()
-#     character_edit = get_object_or_404(character, id=id)
-#     form = CharacterForm(instance=character_edit)
-#     context = {
-#         'id' : id,
-#         'form': form,
-#     }    
-#     return render(request, "main_1_2.html", context)
-#изменение персонажа третья страница (сейчас не актуальны)
-# def edit_1_3(request, id):
-#     character_edit = get_object_or_404(character, id=id)
-#     if character_edit.author != request.user:
-#         return redirect('index')
-#     form = CharacterForm(request.POST or None, instance=character_edit)
-#     if form.is_valid():
-#         form.save(commit=False)
-#         auto_correct(form.instance)
-#         form.save()
-#     character_edit = get_object_or_404(character, id=id)
-#     form = CharacterForm(instance=character_edit)
-#     context = {
-#         'form': form,
-#     }    
-#     return render(request, "main_1_3.html", context)    
+#изменение персонажа вторая страница
+def edit_1_2(request, id):
+    character_edit = get_object_or_404(character, id=id)
+    if character_edit.author != request.user:
+        return redirect('index')
+    form = CharacterForm(request.POST or None, instance=character_edit)
+    if form.is_valid():
+        form.save(commit=False)
+        auto_correct(form.instance)
+        form.save()
+    character_edit = get_object_or_404(character, id=id)
+    form = CharacterForm(instance=character_edit)
+    context = {
+        'id' : id,
+        'form': form,
+    }    
+    return render(request, "main_1_2.html", context)
+#изменение персонажа третья страница
+def edit_1_3(request, id):
+    character_edit = get_object_or_404(character, id=id)
+    if character_edit.author != request.user:
+        return redirect('index')
+    form = CharacterForm(request.POST or None, instance=character_edit)
+    if form.is_valid():
+        form.save(commit=False)
+        auto_correct(form.instance)
+        form.save()
+    character_edit = get_object_or_404(character, id=id)
+    form = CharacterForm(instance=character_edit)
+    context = {
+        'form': form,
+    }    
+    return render(request, "main_1_3.html", context)    
 
 #о сайте
 def about_site(request):
@@ -187,3 +188,27 @@ def auto_correct(a):
     #model = Articles
     #success_url = '/'
     #template_name = 'delete.html'
+
+
+# class YourTestClass(TestCase):
+
+#     @classmethod
+#     def setUpTestData(cls):
+#         print("setUpTestData: Run once to set up non-modified data for all class methods.")
+#         pass
+
+#     def setUp(self):
+#         print("setUp: Run once for every test method to setup clean data.")
+#         pass
+
+#     def test_false_is_false(self):
+#         print("Method: test_false_is_false.")
+#         self.assertFalse(False)
+
+#     def test_false_is_true(self):
+#         print("Method: test_false_is_true.")
+#         self.assertTrue(False)
+
+#     def test_one_plus_one_equals_two(self):
+#         print("Method: test_one_plus_one_equals_two.")
+#         self.assertEqual(1 + 1, 2)

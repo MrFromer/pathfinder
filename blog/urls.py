@@ -10,7 +10,7 @@ urlpatterns = [
     #path('edit_1_2/<int:id>/', views.edit_1_2, name = "edit_1_2"),
     #path('edit_1_2/', views.edit_1_2, name = "edit_1_2_no_id"),
     #path('edit_1_3/<int:id>/', views.edit_1_3, name = "edit_1_3"),
-    path('edit_1_2/', views.edit_1_2, name = "edit_1_3_no_id"),
+    #path('edit_1_2/', views.edit_1_2, name = "edit_1_3_no_id"),
     path('about_site', views.about_site, name = "about_site"),
     #path('<int:id>/delete', views.delete, name = "delete")
 ]
