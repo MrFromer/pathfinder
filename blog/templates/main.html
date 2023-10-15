@@ -1,1286 +1,1531 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Страница заполнения</title>
-    <link href="D:\pathfinder\css\main.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="http://www.htmlbook.ru/main.css">
-</head>
-<body bgcolor="white" link="#" vlink="#" style="height:60px" > 
+{% extends 'index.html' %}
+
+{% block title %} <title> Выбор персонажа </title> {% endblock %}
+
+{% block content %}
+<style>
+ th{ 
+    max-width: 130px;
+  }
+  [data-tooltip] {
+    position: relative; /* Относительное позиционирование */ 
+   }
+   [data-tooltip]::after {
+    content: attr(data-tooltip); /* Выводим текст */
+    position: absolute; /* Абсолютное позиционирование */
+    width: 120%%; /* Ширина подсказки */
+    left: 0; top: 0; /* Положение подсказки */
+    background: #A9A9A9; /* Синий цвет фона */
+    color: #fff; /* Цвет текста */
     
-        
-    <!--<h1>{{form.date}}<h2>-->
+    
+    pointer-events: none; /* Подсказка */
+    opacity: 0; /* Подсказка невидима */
+    transition: 1s; /* Время появления подсказки */
+   } 
+   [data-tooltip]:hover::after {
+    opacity: 1; /* Показываем подсказку */
+    top: 1em; /* Положение подсказки */
+   }
    
-    {% csrf_token %}
-
-    
-<style> 
-        
-    a{
-        color:#ffff;
-        text-decoration: none;
-    }
-    .header{
-        border:10px;
-        display: flex;
-        margin: 10px;
-        justidy-content: space-between;
-        justidy-content: center;
-        padding: 10px; 
-        background: #689CD2;
-        color: #fff;
-        font-family: Lobster ;
-    }
-    .header__section{
-        display: flex;
-        aling-items: center;
-        justidy-content: ;
-    }
-    .header__item{
-        padding: 10px 15px;
-        font-size: 20px;
-        margin-left:5px;
-        float: left;
-    }
-    .header_item:hover{
-        background-color: #FF9900;
-        border-radius: 4px;
-    }
-    .headerlogo{
-        font-weight: bold;
-    }
-    .headerButton{
-        cursor: pointer;
-    }
-
-    
-    .blocktext {
-        width: 100%;
-        height: 100%;
-        display: table;
-        position: relative;
-        margin: 0px -1000px 0px auto;
-    }  
-    body {
-        width: 1500px;
-    }
-    
-    .tableparams_one {
-    position: relative;
-    margin: 0px auto;
-    right:600px;
-    }  
-    .general-input {
-    border: none;
-    border-bottom: 1px solid black;
-    background-color: transparent;
-    color: inherit;
-    outline: none;
-    padding:0;
-    margin: 0em 0em 0em 0em;
-    }
-    
-    h4 {
-    background: black;
-    color: white;
-    padding: 2px;
-    width: 60px;
-    height: 30px;
-    margin: 0em 0em 0em 0em;
-    align="center"
-    top:10px
-    }
-    .input_abilyti {    
-    margin: 0.6em 1em 0.6em 0em;
-    height:30px;
-    }
-    
-    .tableparams_two {
-    position: relative;
-    margin: 0px auto;
-    bottom: px; 
-    right: 780px;
-    }    
-    
-    .ory3  {
-    background: black;
-    color: white;
-    padding: 2px;
-    width: 90px;
-    height: 45px;
-    margin: 0em 0em 0em 0em;
-    align="center"
-    
-    }
-        
-    .input_HP {
-    width: 110px;
-    height: 25px
-    }          
-                     
-    .tableparams_three {
-    position: relative;
-    margin: 0px auto;
-    bottom: 340px; 
-    right: 410px;
-    }
-    .inich {
-    background: black;
-    color: white;
-    padding: 2px;
-    width: 135px;
-    height: 40px;
-    margin: 0m 0em 0em 0em;
-    align="center"
-    }
-        
-    .input_initiative {    
-    margin: 1.8em 0.2em 0em 0em;
-    height:30px;
-    
-    } 
-    .tableparams_four {
-    position: relative;
-    margin: 0px auto;
-    right:613px;
-    bottom:365px;
-    }  
-    .input {
-    margin: 0.2em 0.2em 0.2em 0.2em;
-    height:30px;   
-    }
-    .tableparams_five{
-    position: relative;
-    margin: 0px auto;
-    right:580px;
-    bottom:370px;    
-    }
-    
-    .tableparams_six{
-    position: relative;
-    margin: 0px auto;
-    right:585px;
-    bottom:375px; 
-    
-    }
-    .sagolovok{
-    background: black;
-    color: white;
-    padding: 2px;
-    width: 120px;
-    height: 40px;
-    margin: 0em 0em 0em 0em;
-    align="center"
-    }
-    .tableparams_seven{
-    position: relative;
-    margin: 0px auto;
-    right:729px;
-    bottom:355px; 
-    }
-    .tableparams_eight{
-    position: relative;
-    margin: 0px auto;
-    right:685px;
-    bottom:355px; 
-    }
-    .tableparams_nine{
-    position: relative;
-    margin: 0px auto;
-    right:717px;
-    bottom:355px; 
-    }
-    h6 {
-    margin: 0
-    }
-    .tableparams_ten_1{
-    position: relative;
-    margin: 0px auto;
-    right:653px;
-    bottom:355px;     
-    }
-    .tableparams_eleven{
-    position: relative;
-    margin: 0px auto;
-    right:590px;
-    bottom:200px;        
-    }
-    .tableparams_twelve{
-    position: relative;
-    margin: 0px auto;
-    right:590px;
-    bottom:200px; 
-    cellspacing:  
-    }
-    .input_one {
-    margin: 0.2em 0.2em 0.2em 0.2em;
-    height:30px;  
-    width:60px;  
-    }
-    .table_thirteen{
-    position: relative;
-    margin: 0px auto;
-    right:590px;
-    bottom:200px;      
-    }
-    .table_fourteen{
-    position: relative;
-    margin: 0px auto;
-    right:590px;
-    bottom:200px;          
-    }
-    .table_fiftine{
-        position: relative;
-        margin: 0px auto;
-        right:950px;
-        bottom:200px;      
-        }
-    .table_sixtien{
-        position: relative;
-        margin: 0px auto;
-        right:580px;
-        bottom:1730px;      
-    }
-    .table_seventen{
-        position: relative;
-        margin: 0px auto;
-        right:580px;
-        bottom:1730px;      
-    }
-    .table_eighteenth{
-        position: relative;
-        margin: 0px auto;
-        right:160px;
-        bottom:3705px;      
-    }
-        
-        
-@media screen and (max-width:800px){
-
-}
-                        
 </style>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"crossorigin="anonymous"></script>
-<form method="post">
-    {% csrf_token %}
-    
 
-  
-  <nav class="navbar navbar-expand-lg bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand " style="position: relatiev;  margin-top: -3px" href="#"> <h3>Vailable</h3></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Переключатель навигации">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a style=''class="nav-link active" aria-current="page" href="{% url 'index' %}">ГЛАВНАЯ</a>
-          </li>
-          
-          <li class="nav-item dropdown">
-            <a style="color:black" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              ПЕРСОНАЖИ
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="{% url 'saveforms' %}">Создать нового персонажа</a> </li>
-              <li><a class="dropdown-item" href="{% url 'list_character' %}">Изменить пресонажа</a></li>
-              <li><hr class="dropdown-divider"></li>
-              
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a style="color:black"class="nav-link" href="{% url 'logout' %}">ВЫХОД</a>
-          </li>
-          <li>
-            <a style="position: relatiev;"class="nav-link active" aria-current="page" href="{% url 'about_site' %}" style=" color: #959a9e; padding: 10px;">О НАС</a>
-          </li>
-        </ul>
+{% csrf_token %}
+<!-- Первая таблица, где общая информация-->
+<div class="table-responsive">
+<table class="table table-sm table-borderless table-hover" >
+    <thead>
+      <tr>
         
-        <!-- 
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Поиск">
-          <button class="btn btn-outline-success" type="submit">Поиск</button>
-        </form>
-      -->
-      </div>
-    </div>
-  </nav>
-</form>
-
-    <form method="post" style="width: 100%;
-    height: 100%;
-    display: table;
-    position: relative;
-    margin: 0px -1000px 0px auto;">
-
-
-
-                       
-    <table class="tableparams_one" class="aaaa"style=margin-left:px  style=padding:0px>
-
-
-
-    <tr> <td> <input style = "width:150px" type="text" class = "general-input"size="2" id={{form.character_name}}  <br> Имя персонажа </td> 
-
-
-
+        <th scope="col">ИМЯ ПЕРСОНАЖА</th>
+        <th scope="col">Мировоззрение</th>
+        <th scope="col">Игрок</th>
+        <th scope="col">Уровень персонажа</th>
+        <th scope="col">Вес</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td> <input  type="text"  id={{form.character_name}}  </td> 
+        <td> <input   type="text" id={{form.worldview}}  </td>
+        <td> <input  type="text"  id={{form.nameperson}} </td>
+        <td> <input   type="text" id={{form.lvlcharacter}} </td>
+        <td> <input  type="text"  id={{form.weight}}  </td>
+    <tbody>
+    <thead>
+      <tr>
         
-    <td> <input style = "width:100px" type="text" class = "general-input"size="2" id={{form.worldview}} <br> Мировоззрение  </td>
-    <td> <input style = "width:100px" type="text" class = "general-input"size="2" id={{form.nameperson}} <br> Игрок </td>
-    <td> <input style = "width:100px" type="text" class = "general-input"size="2" id={{form.eye}} <br> Глаза </td>
-    </tr>
-    <tr>
-    <td> <input style= "width:150px" type="text" class = "general-input"size="2" id={{form.lvlcharacter}} <br> Уровень персонажа </td>
-    <td> <input style = "width:100px" type="text" class = "general-input"size="2" id={{form.thedeity}} <br> Божество </td>
-    <td> <input style = "width:100px" type="text" class = "general-input"size="2" id={{form.homeland}} <br> Родина </td>
-    <td> <input style = "width:100px" type="text" class = "general-input"size="2" id={{form.hair}} <br> Волосы </td>
-    <td> <input style = "width:50px" type="text" class = "general-input"size="2" id={{form.weight}} <br> Вес </td>
-    
-    </tr>    
-    <tr>
-    <td> <input style = "width:150px" type="text" class = "general-input"size="2" id={{form.race}} <br> Народ </td> 
-    <td> <input style = "width:100px" type="text" class = "general-input"size="2" id={{form.size}} <br> Размер </td>
-    <td> <input style = "width:100px" type="text" class = "general-input"size="2" id={{form.floor}} <br> Пол </td>  
-    <td> <input style = "width:100px" type="text" class = "general-input"size="2" id={{form.age}} <br> Возраст </td>
-    <td> <input style = "width:50px" type="text" class = "general-input"size="2" id={{form.height}} <br> Рост </td>
-   
-    </tr>
-    </table>  
-    
-    
-    
+        <th scope="col">Глаза</th>
+        <th scope="col">Божество</th>
+        <th scope="col">Родина</th>
+        <th scope="col">Волосы</th>
+        <th scope="col">Народ</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td> <input   type="text"   id={{form.eye}}  </td>
+            <td> <input   type="text"   id={{form.thedeity}} </td>
+            <td> <input  type="text"  id={{form.homeland}} </td>
+            <td> <input  type="text"  id={{form.hair}}  </td>
+            <td> <input  type="text"  id={{form.race}} </td> 
+    <tbody>
+    <thead>
+      <tr>
+        <th scope="col">Размер </th>
+        <th scope="col">Пол </th>
+        <th scope="col">Возраст </th>
+        <th scope="col">Рост </th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td> <input    type="text"    id={{form.size}}  </td>
+            <td> <input    type="text"    id={{form.floor}}  </td>  
+            <td> <input    type="text"    id={{form.age}} </td>
+            <td> <input    type="text"    id={{form.height}} </td>
+    <tbody>
+  </table>
+</div>
+
+<!-- ХАРАКТЕРИСТИКИ -->
+<table class="table table-borderless table-hover  table-secondary" style='border: 1px solid purple;'>
+    <thead>
+      <tr>
+        <th scope="col" style='width:180px;'>ХАРАКТЕРИС.</th>
+        <th scope="col">ЗНАЧЕНИЕ</th>
+        <th scope="col">МОДИФИКАТОР</th>
+        <th scope="col">ВРЕМ ИЗМЕНЕНИЕ</th>
+        <th scope="col">ВРЕМ МОДИФИКАТОР</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th class="table-dark" scope="row">СИЛА</th>
+        
+        
+        <td> <input type="text"  id={{form.srtength_ability_score}} </td>
+        <td> <input type="text"  id={{form.srtength_ability_modifier}} </td>
+        <td> <input type="text"  id={{form.srtength_temp_adjustment}} </td>
+        <td> <input type="text"  id={{form.srtength_temp_modifier}} </td>
+      </tr>
+      <tr>
+        <th class="table-dark" scope="row">ЛОВКОСТЬ</th>
+        <td> <input type="text"  id={{form.dexterity_ability_score}} </td>
+        <td> <input type="text"  id={{form.dexterity_ability_modifier}} </td>
+        <td> <input type="text"  id={{form.dexterity_temp_adjustment}} </td>
+        <td> <input type="text"  id={{form.dexterity_temp_modifier}} </td>
+      </tr>
+      <tr>
+        <th class="table-dark" scope="row">ВЫНОСЛ.</th>
+        <td> <input type="text"  id={{form.constitution_ability_score}} </td>
+        <td> <input type="text"  id={{form.constitution_ability_modifier}} </td>
+        <td> <input type="text"  id={{form.constitution_temp_adjustment}} </td>
+        <td> <input type="text"  id={{form.constitution_temp_modifier}} </td>
+      </tr>
+      <tr>
+        <th class="table-dark" scope="row">ИНТЕЛЛЕКТ</th>
+        <td> <input type="text"  id={{form.intelligence_ability_score}} </td>
+        <td> <input type="text"  id={{form.intelligence_ability_modifier}} </td>
+        <td> <input type="text"  id={{form.intelligence_temp_adjustment}} </td>
+        <td> <input type="text"  id={{form.intelligence_temp_modifier}} </td>
+      </tr>
+      <tr>
+        <th class="table-dark" scope="row">МУДРОСТЬ</th>
+        <td> <input type="text"  id={{form.wisdom_ability_score}} </td>
+        <td> <input type="text"  id={{form.wisdom_ability_modifier}} </td>
+        <td> <input type="text"  id={{form.wisdom_temp_adjustment}} </td>
+        <td> <input type="text"  id={{form.wisdom_temp_modifier}} </td>
+      </tr>
+      <tr>
+        <th class="table-dark" scope="row">ХАРИЗМА</th>
+        <td> <input type="text"  id={{form.charisma_ability_score}} </td>
+        <td> <input type="text"  id={{form.charisma_ability_modifier}} </td>
+        <td> <input type="text"  id={{form.charisma_temp_adjustment}} </td>
+        <td> <input type="text"  id={{form.charisma_temp_modifier}} </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class='table-responsive'>
+  <table class="table table-borderless table-hover table-light">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col">Раны/текущие ПЗ</th>
+        <th scope="col">Несмертельный урон</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th class="table-dark" scope="row" >ПУНКТ ЗДОРОВЬЯ</th>
+        <td> <input type="text" placeholder='ВСЕГО'  id={{form.hit_points_total}} </td>
+        <td> <input type="text" placeholder='СУ'  id={{form.hit_points_damage_reduction}} </td>
+        <td> <input type="text" class="table-primary" id={{form.hit_points_wounds_current_HP}} </td>
+        <td> <input type="text" class="table-primary" id={{form.hit_points_nonlethal_damage}} </td>
+      </tr>
       
-    <table class="tableparams_two">
-        <th><h6>ХАРАК <br> ТЕРИСТИКА<h6></th>  <th><h6>ЗНАЧЕНИЕ<h6></th>  <th><h6>МОДИ <br> ФИКАТОР<h6></th>  <th><h6>ВРЕМ. <br> ИЗМЕНЕНИЕ<h6></th>  <th><h6>ВРЕМ. <br> МОДИФИК<h6></th></tr>
-
-        <tr><td><h4 align="center"> СИЛ</h4><br><h4 align="center">ЛВК</h4><br><h4 align="center">ВЫН</h4><br><h4 align="center"> ИНТ </h4><br><h4 align="center"> МДР </h4><br><h4 align="center"> ХАР</h4></td>
-
-        <td><input type="text" class = "input_abilyti"size="2" id={{form.srtength_ability_score}}<br><input type="text" class = "input_abilyti" size="2" id = {{form.dexterity_ability_score}} <br><input type="text" class = "input_abilyti" size="2" id = {{form.constitution_ability_score}} <br><input type="text" class = "input_abilyti" size="2" id={{form.intelligence_ability_score}}<br><input type="text"  class = "input_abilyti" size="2" id={{form.wisdom_ability_score}}<br> 
-        <input type="text" class = "input_abilyti"size="2" id={{form.charisma_ability_score}}</td></td>
-
-        <td><input type="text" class = "input_abilyti" size="2" id={{form.srtength_ability_modifier}} <br><input type="text" class = "input_abilyti" size="2" id={{form.dexterity_ability_modifier}} <br><input type="text" class = "input_abilyti" size="2" id={{form.constitution_ability_modifier}} <br><input type="text"  class = "input_abilyti" size="2" id={{form.intelligence_ability_modifier}} <br><input type="text" class = "input_abilyti" size="2" id={{form.wisdom_ability_modifier}} <br>
-        <input type="text" class = "input_abilyti"size="2" id={{form.charisma_ability_modifier}} </td></td>
+      <tr>
+        <th class="table-dark" data-tooltip="МОДИФИКАТОР" scope="row" >ИНИЦИАТИВА</th>
+        <td> <input type="text" placeholder='ВСЕГО ='  id={{form.initiative_modifier_total}} </td>
         
-        <td><input type="text" class = "input_abilyti" size="2" id={{form.srtength_temp_adjustment}} <br><input type="text" class = "input_abilyti" size="2" id={{form.dexterity_temp_adjustment}} <br><input type="text" class = "input_abilyti" size="2" id={{form.constitution_temp_adjustment}} <br><input type="text"  class = "input_abilyti" size="2" id={{form.intelligence_temp_adjustment}} <br><input type="text" class = "input_abilyti" size="2" id={{form.wisdom_temp_adjustment}} <br>
-        <input type="text" class = "input_abilyti"size="2" id={{form.charisma_temp_adjustment}} </td></td>
         
-        <td><input type="text" class = "input_abilyti" size="2" id={{form.srtength_temp_modifier}} <br><input type="text" class = "input_abilyti" size="2" id={{form.dexterity_temp_modifier}} <br><input type="text" class = "input_abilyti" size="2" id={{form.constitution_temp_modifier}} <br><input type="text" class = "input_abilyti" size="2" id={{form.intelligence_temp_modifier}} <br><input type="text" class = "input_abilyti" size="2" id={{form.wisdom_temp_modifier}} <br>
-        <input type="text" class = "input_abilyti"size="2" id={{form.charisma_temp_modifier}} </td></td></tr>
-    </table>
-
-
-    
-    
-    <table  class="tableparams_three">
-        <tr><td colspan="1 "><h3 class="ory3"align="center" style="position:relative; left:20px;">ПЗ <br><small>П.здоровья </small></h3> </td><td colspan="2 "><b> ВСЕГО <br> <input class="input_HP" type="text"  id={{form.hit_points_total}} </td> <td colspan="2 "> <b>СУ <br> <input class="input_HP" type="text"  id={{form.hit_points_damage_reduction}} </td></tr>
-        <tr><td colspan="5 "> <b>Раны/текущие ПЗ <br>  <input type="text" style = "width:375px; height:80px; " id={{form.hit_points_wounds_current_HP}}  </td></tr>
-        <tr><td colspan="5 "> <b>Несмертельный урон <br>  <input type="text" style = "width:375px; height:50px; " id={{form.hit_points_nonlethal_damage}}  </td></tr>
-
-        <tr> <td  style="position:relative; left:20px; bottom:5px" colspan="2" ><h3 align="center" class="inich">ИНИЦИАТИВА <br><small>модификатор</small></h3></td>  
-        <td> <input type="text" class="input_initiative"  size="2" id={{form.initiative_modifier_total}} <br> <b>ВСЕГО <br><br> </td> 
-        <td style="position:relative; right:30px"> = <input type="text" class="input_initiative" style=""  size="2" id={{form.initiative_modifier_dex_modifier}} <br> <b>МОДИФ. <br> ЛВК</td>
-        <td style="position:relative; right:30px"> + <input type="text" class="input_initiative"  size="2" id={{form.initiative_modifier_misc_modifier}} <br> <b>ПРОЧИЕ <br> МОДИФ.</td> </tr>
-
-        </table>
-
-        <table class="tableparams_four">
-        <tr>
-            <td style="position:relative; bottom:10px" ><h4>КБ</h4></td> 
-            <td> <input type="text" class="input" size="2" id={{form.armor_class_total}} <br> <b>ВСЕГО </td>
-            <td style="position:relative; bottom:10px"> = <big><b>10<b></big> +  </td>      
-            <td style="position:relative; top:18px" > <input type="text" class="input" size="2" id={{form.armor_class_bonus_armor}} <br> <br> <div align="center" style="position:relative; bottom:20px"><small><b>БОНУС <br> ДОСПЕХА </small></div></td> 
-            <td style="position:relative; top:8px" > +  <input type="text" class="input" size="2" id={{form.armor_class_shield_bonus}} <br> <div align="center" style="position:relative; left:8px"><small><b>БОНУС <br> ЩИТА </small></div></td>
-            <td style="position:relative; top:8px" > +  <input type="text" class="input" size="2" id={{form.armor_class_dex_modifier}} <br> <div align="center" style="position:relative; left:8px"><small> <b>МОДИФ. <br> ЛВК. </small></div> </td>
-            <td style="position:relative; top:8px" > +  <input type="text" class="input" size="2" id={{form.armor_class_size_modifier}} <br> <div align="center" style="position:relative; left:8px"><small> <b>МОДИФ. <br> РАЗМЕРА </small></div> </td>       
-            <td style="position:relative; top:8px" > +  <input type="text" class="input" size="2" id={{form.armor_class_natural_armor}} <br> <div align="center" style="position:relative; left:8px"><small> <b>ЕСТЕСТВ. <br> БРОНЯ </small></div> </td>
-            <td style="position:relative; top:8px" > +  <input type="text" class="input" size="2" id={{form.armor_class_deflection_modifier}} <br> <div align="center" style="position:relative; left:8px"><small> <b>БОНУС. <br> ОТРАЖ. </small></div> </td>
-            <td style="position:relative; top:8px" > +  <input type="text" class="input" size="2" id={{form.armor_class_misc_modifier}} <br> <div align="center" style="position:relative; left:8px"><small> <b>ПРОЧИЕ. <br> МОДИФ. </small></div> </td> 
-        </tr>
-    </table>
-
-    <table class="tableparams_five">
-    <tr>
-        <td colspan="1"><h3 class="ory3" style="width:150px; height:40px" align="center">КАСАНИЕ<br><small>класс брони</small></td> 
-        <td><input type="text" class="input" size="2" id={{form.touch_armor_class}} </td> 
-        <td colspan="1"><h3 class="ory3" style="width:150px; height:40px" align="center">ВРАСПЛОХ<br><small>класс брони</small></td>
-        <td><input type="text" class="input" size="2" id={{form.flat_footed_armor_class}} </td>  
-        <td style="position:relative; bottom:9px" > <br><input type="text" style="width:300px;"class="input" size="2"value="МОДИФИКАТОРЫ" id={{form.armor_class_modifier}} </td>  
-    </tr>
-    </table>
-
-    <table class="tableparams_six">
-    <tr><th><h6 >ИСПЫТАНИЯ <h6></th>  <th><h6>ВСЕГО<h6></th>  <th><h6 style="position:relative; right:-10px" >БАЗОВЫЙ<h6></th>  <th><h6 style="position:relative; right:-10px">МОДИФ. <br> ХАРЬКИ.<h6></th>  <th><h6 style="position:relative; right:-10px">МАГИЧ. <br> МОДИФ.<h6></th><th><h6 style="position:relative; right:-10px">ПРОЧИЕ <br> МОДИФ.<h6></th> <th><h6 style="position:relative; right:-10px">ВРЕМЕН. <br> МОДИФ.<h6>  </tr>
-    <tr>
-        <td ><h3 class="sagolovok" style="width:150px; height:40px">СТОЙКОСТЬ <br><small>выносливость</small></h3></td>
-        <td><input type="text" class="input" size="2" id={{form.fortitude_total}} </td>
-        <td> = <input type="text" class="input" size="2" id={{form.fortitude_base_save}} </td>
-        <td> + <input type="text" class="input" size="2" id={{form.fortitude_ability_modifier}} </td>
-        <td> + <input type="text" class="input" size="2" id={{form.fortitude_magic_modifier}} </td>
-        <td> + <input type="text" class="input" size="2" id={{form.fortitude_misc_modifier}} </td>
-        <td> + <input type="text" class="input" size="2" id={{form.fortitude_temporary_modifier}} </td>
+        <td> <input type="text" placeholder=' = МОДИФ. ЛВК + '  id={{form.initiative_modifier_dex_modifier}} </td>
         
-    </tr>   
-    <tr>
-        <td ><h3 class="sagolovok" style="width:150px; height:40px">РЕАКЦИЯ <br><small>ловкость</small></h3></td>
-        <td><input type="text" class="input" size="2" id={{form.reflex_total}} </td>
-        <td> = <input type="text" class="input" size="2" id={{form.reflex_base_save}} </td>
-        <td> + <input type="text" class="input" size="2" id={{form.reflex_ability_modifier}} </td>
-        <td> + <input type="text" class="input" size="2" id={{form.reflex_magic_modifier}} </td>
-        <td> + <input type="text" class="input" size="2" id={{form.reflex_misc_modifier}} </td>
-        <td> + <input type="text" class="input" size="2" id={{form.reflex_temporary_modifier}} </td>
-        <td><input type="text" class="input" size="2" style="width:150px;" rowspan="3" value="МОДИФИКАТОРЫ"id={{form.saving_throws_modifier}}</td>
-        
-    </tr>   
-    <tr>
-        <td ><h3 class="sagolovok" style="width:150px; height:40px">ВОЛЯ <br><small>мудрость</small></h3></td>
-        <td>   <input type="text" class="input" size="2" id={{form.will_total}} </td>
-        <td> = <input type="text" class="input" size="2" id={{form.will_base_save}} </td>
-        <td> + <input type="text" class="input" size="2" id={{form.will_ability_modifier}} </td>
-        <td> + <input type="text" class="input" size="2" id={{form.will_magic_modifier}} </td>
-        <td> + <input type="text" class="input" size="2" id={{form.will_misc_modifier}} </td>
-        <td> + <input type="text" class="input" size="2" id={{form.will_temporary_modifier}} </td>
-    </tr>    
-     
-    </table>
-    <table class="tableparams_seven">
-        <tr> 
-        <td ><h3 class="sagolovok" style="width:150px; height:40px">БАЗОВЫЙ <br><small>модификатор атаки</small></h3></td>
-        <td> <input type="text" class="input" size="2" id={{form.base_attack_bonus}} </td>
-        <td><h3 class="sagolovok" style="width:180px; height:40px">УСТОЙЧИВОСТЬ <br><small>к магии</small></h3></td>
-        <td> <input type="text" class="input" size="2" id={{form.spell_resistance}} </td>
-        </tr>
-    </table>
+        <td> <input type="text" placeholder='+ ПРОЧИЕ МОДИФ.' class="table-primary" id={{form.initiative_modifier_misc_modifier}} </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
-    <table class="tableparams_eight">
-    <tr>
-        <th></th>
-        <th><h6> ВСЕГО <h6></th>
-        <th><h6 style="position:relative; right:-10px"> БМА <h6></th>
-        <th><h6 style="position:relative; right:-10px"> МОДИФ <br> СИЛ <h6></th>
-        <th><h6 style="position:relative; right:-10px"> МОДИФ <br> РАЗМЕРА <h6></th>   
-    </tr>
-    <tr> 
-        <td> <h3 class="sagolovok" style="width:100px; height:30px">МБМ</h3></td>
-        <td>   <input type="text" class="input" size="2" id={{form.cmb_total}} </td>
-        <td> = <input type="text" class="input" size="2" id={{form.cmb_base_attack_bonus}} </td>
-        <td> + <input type="text" class="input" size="2" id={{form.cmb_strength_modifier}} </td>
-        <td> + <input type="text" class="input" size="2" id={{form.cmb_size_modifier}} </td>
-        <td><input type="text" class="input" size="2" style="width:150px;" rowspan="3" value="МОДИФИКАТОРЫ"id={{form.cmb_modifier}}</td>
-    </tr>
-    </table>
-
-    <table class="tableparams_nine">
-    <tr>
-        <th></th>
-        <th><h6> ВСЕГО <h6></th>
-        <th><h6 style="position:relative; right:-10px"> БМА <h6></th>
-        <th><h6 style="position:relative; right:-10px"> МОДИФ <br> СИЛ <h6></th>
-        <th><h6 style="position:relative; right:-10px"> МОДИФ <br> ЛВК <h6></th>   
-        <th><h6 style="position:relative; right:10px"> МОДИФ <br> РАЗМЕРА <h6></th> 
-    </tr>
-        <tr> 
-        <td> <h3 class="sagolovok" style="width:100px; height:30px">ЗМБ</h3></td>
-        <td>   <input type="text" class="input" size="2" id={{form.cmd_total}} </td>
-        <td> = <input type="text" class="input" size="2" id={{form.cmd_base_attack_bonus}} </td>
-        <td> + <input type="text" class="input" size="2" id={{form.cmd_dexterity_modifier}} </td>
-        <td> + <input type="text" class="input" size="2" id={{form.cmd_size_modifier}} </td>
-        <td> + <input type="text" class="input" size="2" id={{form.cmd_strength_modifier}} + 10</td>
-    </tr>
-    </table>
-
-    <table class="tableparams_ten_1">
-    <tr>
-        <td colspan="2"><h2 class="sagolovok" style="width:300px; height:30px">ОРУЖИЕ</h2></td>
-        <td colspan="1"><h3 class="sagolovok" style="width:200px; height:30px">модификатор атаки</h3></td>
-        <td colspan="1"><h2 class="sagolovok" style="width:100px; height:30px">КРИТ.</h2></td>
-    </tr>
-    <tr>    
-        <td colspan="2"><input type="text" class="input" size="2" style="width:290px;" id={{form.weapon_one_name}} </td>
-        <td colspan="1"><input type="text" class="input" size="2" style="width:190px;" id={{form.weapon_one_attack_bonus}} </td>
-        <td colspan="1"><input type="text" class="input" size="2" style="width:90px;" id={{form.weapon_one_critical}} </td>
-    </tr>
-    </tr>
-    <td colspan="1"><h2 class="sagolovok" style="width:100px; height:30px">ТИП</h2></td>
-    <td colspan="1"><h3 class="sagolovok" style="width:150px; height:30px">ДИСТАНЦИЯ</h3></td>
-    <td colspan="1"><h2 class="sagolovok" style="width:200px; height:30px">БОЕПРИПАСЫ</h2></td>
-    <td colspan="1"><h2 class="sagolovok" style="width:100px; height:30px">УРОН</h2></td>
-    </tr>
-    <tr>    
-        <td colspan="1"><input type="text" class="input" size="2" style="width:90px; position:relative; right:10px" id={{form.weapon_one_type}} </td>
-        <td colspan="1"><input type="text" class="input" size="2" style="width:140px; position:relative; right:14px" id={{form.weapon_one_range}} </td>
-        <td colspan="1"><input type="text" class="input" size="2" style="width:190px;" id={{form.weapon_one_ammunition}} </td>
-        <td colspan="1"><input type="text" class="input" size="2" style="width:90px;" id={{form.weapon_one_damage}} </td>
-    </tr>
-    </table>
-
-    <table class="tableparams_ten_1">
-    <tr>
-        <td colspan="2"><h2 class="sagolovok" style="width:300px; height:30px">ОРУЖИЕ</h2></td>
-        <td colspan="1"><h3 class="sagolovok" style="width:200px; height:30px">модификатор атаки</h3></td>
-        <td colspan="1"><h2 class="sagolovok" style="width:100px; height:30px">КРИТ.</h2></td>
-    </tr>
-    <tr>    
-        <td colspan="2"><input type="text" class="input" size="2" style="width:290px;" id={{form.weapon_two_name}} </td>
-        <td colspan="1"><input type="text" class="input" size="2" style="width:190px;" id={{form.weapon_two_attack_bonus}} </td>
-        <td colspan="1"><input type="text" class="input" size="2" style="width:90px;" id={{form.weapon_two_critical}} </td>
-    </tr>
-    </tr>
-        <td colspan="1"><h2 class="sagolovok" style="width:100px; height:30px">ТИП</h2></td>
-        <td colspan="1"><h3 class="sagolovok" style="width:150px; height:30px">ДИСТАНЦИЯ</h3></td>
-        <td colspan="1"><h2 class="sagolovok" style="width:200px; height:30px">БОЕПРИПАСЫ</h2></td>
-        <td colspan="1"><h2 class="sagolovok" style="width:100px; height:30px">УРОН</h2></td>
-    </tr>
-    <tr>    
-        <td colspan="1"><input type="text" class="input" size="2" style="width:90px; position:relative; right:10px" id={{form.weapon_two_type}} </td>
-        <td colspan="1"><input type="text" class="input" size="2" style="width:140px; position:relative; right:14px" id={{form.weapon_two_range}} </td>
-        <td colspan="1"><input type="text" class="input" size="2" style="width:190px;" id={{form.weapon_two_ammunition}} </td>
-        <td colspan="1"><input type="text" class="input" size="2" style="width:90px;" id={{form.weapon_two_damage}} </td>
-    </tr>
-    </table>
-    <table class="tableparams_ten_1">
-    <tr>
-        <td colspan="2"><h2 class="sagolovok" style="width:300px; height:30px">ОРУЖИЕ</h2></td>
-        <td colspan="1"><h3 class="sagolovok" style="width:200px; height:30px">модификатор атаки</h3></td>
-        <td colspan="1"><h2 class="sagolovok" style="width:100px; height:30px">КРИТ.</h2></td>
-    </tr>
-    <tr>    
-        <td colspan="2"><input type="text" class="input" size="2" style="width:290px;" id={{form.weapon_three_name}} </td>
-        <td colspan="1"><input type="text" class="input" size="2" style="width:190px;" id={{form.weapon_three_attack_bonus}} </td>
-        <td colspan="1"><input type="text" class="input" size="2" style="width:90px;" id={{form.weapon_three_critical}} </td>
-    </tr>
-    </tr>
-        <td colspan="1"><h2 class="sagolovok" style="width:100px; height:30px">ТИП</h2></td>
-        <td colspan="1"><h3 class="sagolovok" style="width:150px; height:30px">ДИСТАНЦИЯ</h3></td>
-        <td colspan="1"><h2 class="sagolovok" style="width:200px; height:30px">БОЕПРИПАСЫ</h2></td>
-        <td colspan="1"><h2 class="sagolovok" style="width:100px; height:30px">УРОН</h2></td>
-    </tr>
-    <tr>    
-        <td colspan="1"><input type="text" class="input" size="2" style="width:90px; position:relative; right:10px" id={{form.weapon_three_type}} </td>
-        <td colspan="1"><input type="text" class="input" size="2" style="width:140px; position:relative; right:14px" id={{form.weapon_three_range}} </td>
-        <td colspan="1"><input type="text" class="input" size="2" style="width:190px;" id={{form.weapon_three_ammunition}} </td>
-        <td colspan="1"><input type="text" class="input" size="2" style="width:90px;" id={{form.weapon_three_damage}} </td>
-    </tr>
-    </table>    
-    <table class="tableparams_ten_1">
-    <tr>
-        <td colspan="2"><h2 class="sagolovok" style="width:300px; height:30px">ОРУЖИЕ</h2></td>
-        <td colspan="1"><h3 class="sagolovok" style="width:200px; height:30px">модификатор атаки</h3></td>
-        <td colspan="1"><h2 class="sagolovok" style="width:100px; height:30px">КРИТ.</h2></td>
-    </tr>
-    <tr>    
-        <td colspan="2"><input type="text" class="input" size="2" style="width:290px;" id={{form.weapon_four_name}} </td>
-        <td colspan="1"><input type="text" class="input" size="2" style="width:190px;" id={{form.weapon_four_attack_bonus}} </td>
-        <td colspan="1"><input type="text" class="input" size="2" style="width:90px;" id={{form.weapon_four_critical}} </td>
-    </tr>
-    </tr>
-        <td colspan="1"><h2 class="sagolovok" style="width:100px; height:30px">ТИП</h2></td>
-        <td colspan="1"><h3 class="sagolovok" style="width:150px; height:30px">ДИСТАНЦИЯ</h3></td>
-        <td colspan="1"><h2 class="sagolovok" style="width:200px; height:30px">БОЕПРИПАСЫ</h2></td>
-        <td colspan="1"><h2 class="sagolovok" style="width:100px; height:30px">УРОН</h2></td>
-    </tr>
-    <tr>    
-        <td colspan="1"><input type="text" class="input" size="2" style="width:90px; position:relative; right:10px" id={{form.weapon_four_type}} </td>
-        <td colspan="1"><input type="text" class="input" size="2" style="width:140px; position:relative; right:14px" id={{form.weapon_four_range}} </td>
-        <td colspan="1"><input type="text" class="input" size="2" style="width:190px;" id={{form.weapon_four_ammunition}} </td>
-        <td colspan="1"><input type="text" class="input" size="2" style="width:90px;" id={{form.weapon_four_damage}} </td>
-    </tr>
-    </table>
-    <table class="tableparams_ten_1">
-    <tr>
-        <td colspan="2"><h2 class="sagolovok" style="width:300px; height:30px">ОРУЖИЕ</h2></td>
-        <td colspan="1"><h3 class="sagolovok" style="width:200px; height:30px">модификатор атаки</h3></td>
-        <td colspan="1"><h2 class="sagolovok" style="width:100px; height:30px">КРИТ.</h2></td>
-    </tr>
-    <tr>    
-        <td colspan="2"><input type="text" class="input" size="2" style="width:290px;" id={{form.weapon_five_name}} </td>
-        <td colspan="1"><input type="text" class="input" size="2" style="width:190px;" id={{form.weapon_five_attack_bonus}} </td>
-        <td colspan="1"><input type="text" class="input" size="2" style="width:90px;" id={{form.weapon_five_critical}} </td>
-    </tr>
-    </tr>
-        <td colspan="1"><h2 class="sagolovok" style="width:100px; height:30px">ТИП</h2></td>
-        <td colspan="1"><h3 class="sagolovok" style="width:150px; height:30px">ДИСТАНЦИЯ</h3></td>
-        <td colspan="1"><h2 class="sagolovok" style="width:200px; height:30px">БОЕПРИПАСЫ</h2></td>
-        <td colspan="1"><h2 class="sagolovok" style="width:100px; height:30px">УРОН</h2></td>
-    </tr>
-    <tr>    
-        <td colspan="1"><input type="text" class="input" size="2" style="width:90px; position:relative; right:10px" id={{form.weapon_five_type}} </td>
-        <td colspan="1"><input type="text" class="input" size="2" style="width:140px; position:relative; right:14px" id={{form.weapon_five_range}} </td>
-        <td colspan="1"><input type="text" class="input" size="2" style="width:190px;" id={{form.weapon_five_ammunition}} </td>
-        <td colspan="1"><input type="text" class="input" size="2" style="width:90px;" id={{form.weapon_five_damage}} </td>
-    </tr>
-    </table>
-
-
-    
-    <table class="tableparams_eleven">
-    <tr>
-        <td colspan="1" style="position:relative; right:-7px"><h2 class="sagolovok" style="width:190px; height:60px">СКОРОСТЬ <br> наземная </h2></td>
-        <td colspan="1"><input type="text" class="input" size="2" style="width:170px; height:40px" value="ФУТЫ, КЛЕТКИ" id={{form.speed_land_base_speed_FT_SQ}} <br> <b>БАЗОВАЯ CКОРОСТЬ<b> </td>
-        <td colspan="1"><input type="text" class="input" size="2" style="width:130px; height:40px" value="ФУТЫ, КЛЕТКИ" id={{form.speed_land_with_armor_FT_SQ}} <br> <b>В БРОНЕ<b> </td>
-        <td colspan="1" style="position:relative; top:-10px"><input type="text" class="input" size="3" style="width:200px; height:40px " value="ВРЕМ,МОДИФИКАТОРЫ" id={{form.speed_land_temp_modifiers}} </td>   
-    </tr>
-    <tr>
-        <td colspan="1"><input type="text" class="input" size="2" style="width:200px; height:40px" value="ФУТЫ" id={{form.speed_land_fly_FT}}  <br> <b>ПОЛЁТ  МАНЁВРЕННОСТЬ<b> </td>
-        <td colspan="1"><input type="text" class="input" size="2" style="width:120px; height:40px" value="ФУТЫ" id={{form.speed_land_swim_FT}}  <br> <b>ПЛАВАНИЕ<b> </td>
-        <td colspan="1"><input type="text" class="input" size="2" style="width:120px; height:40px" value="ФУТЫ" id={{form.speed_land_climb_FT}}  <br> <b>ЛАЗАНИЕ<b> </td>
-        <td colspan="1"><input type="text" class="input" size="2" style="width:120px; height:40px" value="ФУТЫ" id={{form.speed_land_burrow_FT}}  <br> <b>РЫТЬЁ<b>  </td>
-    </tr> 
-</table>    
-
-<table class="tableparams_twelve" >
-    <tr> 
-        <td colspan="5" style="position:relative; right:-7px"><h2 class="sagolovok" style="width:750px; height:60px"> <div style="position:relative; top:15px">НАВЫКИ</div> </h2></td>
-    </tr>
-    <th><h6>НАВЫКИ</th> <th><h6>ОБЩИЙ<br>БОНУС</th> <th><h6>МОДИФ.<br> ХАРЬКИ.</th> <th><h6>ПУНКТЫ</th> <th><h6>ПРОЧИЕ<br> МОДИФ</th>
-    <tr>
-        <td colspan="1"><input type="checkbox" id={{form.skill_bluff_bool}} АКРОБАТИКА </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" style="position:relative; top:10px" id={{form.skill_bluff_total_bonus}} <div style="position:relative; top:-20px; right:-64px">  =ЛВК </div>  </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_bluff_attribute_modifiers}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_bluff_points_skill}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" id={{form.skill_bluff_misc_mod}}  </td>
-    </tr>
-    
-    <tr>
-        <td colspan="1"><input type="checkbox" id={{form.skill_acrobatics_bool}} БЛЕФ </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" style="position:relative; top:10px" id={{form.skill_acrobatics_total_bonus}} <div style="position:relative; top:-20px; right:-64px">  =ЛВК </div>  </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_acrobatics_attribute_modifiers}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_acrobatics_points_skill}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" id={{form.skill_acrobatics_misc_mod}}  </td>
-    </tr>
-    <tr>
-        <td colspan="1"><input type="checkbox" id={{form.skill_horseback_riding_bool}} ВЕРХОВНАЯ ЕЗДА </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" style="position:relative; top:10px" id={{form.skill_horseback_riding_total_bonus}} <div style="position:relative; top:-20px; right:-64px">  =ЛВК </div>  </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_horseback_riding_attribute_modifiers}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_horseback_riding_points_skill}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" id={{form.skill_horseback_riding_misc_mod}}  </td>
-    </tr>
-    <tr>
-        <td colspan="1"><input type="checkbox" id={{form.skill_attention_bool}} ВНИМАНИЕ </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" style="position:relative; top:10px" id={{form.skill_attention_total_bonus}} <div style="position:relative; top:-20px; right:-64px">  =ЛВК </div>  </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_attention_misc_attribute_modifiers}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_attention_points_skill}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" id={{form.skill_attention_misc_mod}}  </td>
-    </tr>
-    <tr>
-        <td colspan="1"><input type="checkbox" id={{form.skill_survival_bool}} ВЫЖИВАНИЕ </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" style="position:relative; top:10px" id={{form.skill_survival_total_bonus}} <div style="position:relative; top:-20px; right:-64px">  =ЛВК </div>  </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_survival_attribute_modifiers}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_survival_points_skill}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" id={{form.skill_survival_misc_mod}}  </td>
-    </tr>
-    <tr>
-        <td colspan="1"><input type="checkbox" id={{form.skill_diplomacy_device_bool}} ДИПЛОМАТИЯ </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" style="position:relative; top:10px" id={{form.skill_diplomacy_device_total_bonus}} <div style="position:relative; top:-20px; right:-64px">  =ЛВК </div>  </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_diplomacy_device_attribute_modifiers}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_diplomacy_device_points_skill}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" id={{form.skill_diplomacy_device_misc_mod}}  </td>
-    </tr>
-    <tr>
-        <td colspan="1"><input type="checkbox" id={{form.skill_training_bool}} ДРЕССИРОВКА </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" style="position:relative; top:10px" id={{form.skill_training_total_bonus}} <div style="position:relative; top:-20px; right:-64px">  =ЛВК </div>  </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_training_attribute_modifiers}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_training_points_skill}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" id={{form.skill_training_misc_mod}}  </td>
-    </tr>
-    <tr>
-        <td colspan="1"><input type="checkbox" id={{form.skill_intimidation_artist_bool}} ЗАПУГИВАНИЕ </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" style="position:relative; top:10px" id={{form.skill_intimidation_artist_total_bonus}} <div style="position:relative; top:-20px; right:-64px">  =ЛВК </div>  </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_intimidation_artist_attribute_modifiers}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_intimidation_artist_points_skill}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" id={{form.skill_intimidation_artist_misc_mod}}  </td>
-    </tr>
-    
-    <tr>
-        <td colspan="1"><input type="checkbox" id={{form.skill_elite_bool}} ЗНАНИЕ<br>(ВЫСШИЙ СВЕТ) </td>
-        <td colspan="1"><input  type="text" class="input_one" size="2" style="position:relative; top:10px" id={{form.skill_elite_total_bonus}} <div style="position:relative; top:-20px; right:-64px">  =ЛВК </div>  </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_elite_attribute_modifiers}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_elite_points_skill}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" id={{form.skill_elite_misc_mod}}  </td>
-    </tr>
-    <tr>
-        <td colspan="1"><input type="checkbox" id={{form.skill_geography_bool}} ЗНАНИЕ<br>(ГЕОГРАФИЯ) </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" style="position:relative; top:10px" id={{form.skill_geography_total_bonus}} <div style="position:relative; top:-20px; right:-64px">  =ЛВК </div>  </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_geography_attribute_modifiers}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_geography_points_skill}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" id={{form.skill_geography_misc_mod}}  </td>
-    </tr>
-    <tr>
-        <td colspan="1"><input type="checkbox" id={{form.skill_engineering_bool}} ЗНАНИЕ<br>(ИНЖЕНЕРНОЕ ДЕЛО) </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" style="position:relative; top:10px" id={{form.skill_engineering_total_bonus}} <div style="position:relative; top:-20px; right:-64px">  =ЛВК </div>  </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_engineering_attribute_modifiers}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_engineering_points_skill}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" id={{form.skill_engineering_misc_mod}}  </td>
-    </tr>
-    <tr>
-        <td colspan="1"><input type="checkbox" id={{form.skill_history_bool}} ЗНАНИЕ<br>(ИСТОРИЯ) </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" style="position:relative; top:10px" id={{form.skill_history_total_bonus}} <div style="position:relative; top:-20px; right:-64px">  =ЛВК </div>  </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_history_attribute_modifiers}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_history_points_skill}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" id={{form.skill_history_misc_mod}}  </td>
-    </tr>
-    <tr>
-        <td colspan="1"><input type="checkbox" id={{form.skill_history_bool}} ЗНАНИЕ<br>(ИСТОРИЯ) </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" style="position:relative; top:10px" id={{form.skill_history_total_bonus}} <div style="position:relative; top:-20px; right:-64px">  =ЛВК </div>  </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_history_attribute_modifiers}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_history_points_skill}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" id={{form.skill_history_misc_mod}}  </td>
-    </tr>
-    <tr>
-        <td colspan="1"><input type="checkbox" id={{form.skill_local_history_bool}} ЗНАНИЕ<br>(КРАЕВЕДЕНИЕ) </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" style="position:relative; top:10px" id={{form.skill_local_history_total_bonus}} <div style="position:relative; top:-20px; right:-64px">  =ЛВК </div>  </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_local_history_attribute_modifiers}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_local_history_points_skill}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" id={{form.skill_local_history_misc_mod}}  </td>
-    </tr>
-    <tr>
-        <td colspan="1"><input type="checkbox" id={{form.skill_magic_bool}} ЗНАНИЕ<br>(МАГИЯ) </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" style="position:relative; top:10px" id={{form.skill_magic_total_bonus}} <div style="position:relative; top:-20px; right:-64px">  =ЛВК </div>  </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_magic_attribute_modifiers}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_magic_points_skill}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" id={{form.skill_magic_misc_mod}}  </td>
-    </tr>
-    <tr>
-        <td colspan="1"><input type="checkbox" id={{form.skill_plan_bool}} ЗНАНИЕ<br>(ПЛАНЫ) </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" style="position:relative; top:10px" id={{form.skill_plan_total_bonus}} <div style="position:relative; top:-20px; right:-64px">  =ЛВК </div>  </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_plan_attribute_modifiers}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_plan_points_skill}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" id={{form.skill_plan_misc_mod}}  </td>
-    </tr>
-    <tr>
-        <td colspan="1"><input type="checkbox" id={{form.skill_dungeons_bool}} ЗНАНИЕ<br>(ПОДЗЕМЕЛЬЯ) </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" style="position:relative; top:10px" id={{form.skill_dungeons_total_bonus}} <div style="position:relative; top:-20px; right:-64px">  =ЛВК </div>  </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_dungeons_attribute_modifiers}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_dungeons_points_skill}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" id={{form.skill_dungeons_misc_mod}}  </td>
-    </tr>
-    <tr>
-        <td colspan="1"><input type="checkbox" id={{form.skill_nature_bool}} ЗНАНИЕ<br>(ПРИРОДА) </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" style="position:relative; top:10px" id={{form.skill_nature_total_bonus}} <div style="position:relative; top:-20px; right:-64px">  =ЛВК </div>  </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_nature_attribute_modifiers}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_nature_points_skill}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" id={{form.skill_nature_misc_mod}}  </td>
-    </tr>
-    
-   
-
-
-
-    <tr>
-        <td colspan="1"><input type="checkbox" id={{form.skill_resourcefulness_bool}} ИЗВОРОТЛИВОСТЬ </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" style="position:relative; top:10px" id={{form.skill_resourcefulness_total_bonus}} <div style="position:relative; top:-20px; right:-64px">  =ЛВК </div>  </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_resourcefulness_attribute_modifiers}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_resourcefulness_points_skill}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" id={{form.skill_resourcefulness_misc_mod}}  </td>
-    </tr>
-
-    
-    <tr>
-        <td colspan="1"><input type="checkbox" id={{form.skill_resourcefulness_bool}} ИСПОЛНЕНИЕ <input type="text" style="width:20px" id={{form.skill_performance_dop}} </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" style="position:relative; top:10px" id={{form.skill_performance_total_bonus}} <div style="position:relative; top:-20px; right:-64px">  =ЛВК </div>  </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_performance_attribute_modifiers}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_performance_points_skill}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" id={{form.skill_performance_misc_mod}}  </td>
-    </tr>
-
-    <tr>
-        <td colspan="1"><input type="checkbox" id={{form.skill_performance_one_bool}} ИСПОЛНЕНИЕ <input type="text" style="width:20px" id={{form.skill_performance_one_dop}} </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" style="position:relative; top:10px" id={{form.skill_performance_one_total_bonus}} <div style="position:relative; top:-20px; right:-64px">  =ЛВК </div>  </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_performance_one_attribute_modifiers}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_performance_one_points_skill}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" id={{form.skill_performance_one_misc_mod}}  </td>
-    </tr>
-
-    <tr>
-        <td colspan="1"><input type="checkbox" id={{form.skill_use_magic_devices_bool}} ИСПОЛЬЗОВАНИЕ <br> МАГИЧ. УСТРОЙСТВ </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" style="position:relative; top:10px" id={{form.skill_use_magic_devices_total_bonus}} <div style="position:relative; top:-20px; right:-64px">  =ЛВК </div>  </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_use_magic_devices_attribute_modifiers}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_use_magic_devices_points_skill}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" id={{form.skill_use_magic_devices_misc_mod}}  </td>
-    </tr>
-    
-    <tr>
-        <td colspan="1"><input type="checkbox" id={{form.skill_witchcraft_bool}} КОЛДОВСТВО </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" style="position:relative; top:10px" id={{form.skill_witchcraft_total_bonus}} <div style="position:relative; top:-20px; right:-64px">  =ЛВК </div>  </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_witchcraft_attribute_modifiers}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_witchcraft_points_skill}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" id={{form.skill_witchcraft_misc_mod}}  </td>
-    </tr>
-    <tr>
-        <td colspan="1"><input type="checkbox" id={{form.skill_climbing_bool}} ЛАЗАНИЕ </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" style="position:relative; top:10px" id={{form.skill_climbing_total_bonus}} <div style="position:relative; top:-20px; right:-64px">  =ЛВК </div>  </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_climbing_attribute_modifiers}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_climbing_points_skill}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" id={{form.skill_climbing_misc_mod}}  </td>
-    </tr>
-    <tr>
-        <td colspan="1"><input type="checkbox" id={{form.skill_hilling_bool}} ЛЕЧЕНИЕ </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" style="position:relative; top:10px" id={{form.skill_hilling_total_bonus}} <div style="position:relative; top:-20px; right:-64px">  =ЛВК </div>  </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_hilling_attribute_modifiers}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_hilling_points_skill}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" id={{form.skill_hilling_misc_mod}}  </td>
-    </tr>
-    <tr>
-        <td colspan="1"><input type="checkbox" id={{form.skill_sleight_of_hand_bool}} ЛОВКОСТЬ РУК </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" style="position:relative; top:10px" id={{form.skill_sleight_of_hand_total_bonus}} <div style="position:relative; top:-20px; right:-64px">  =ЛВК </div>  </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_sleight_of_hand_attribute_modifiers}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_sleight_of_hand_points_skill}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" id={{form.skill_sleight_of_hand_misc_mod}}  </td>
-    </tr>
-    <tr>
-        <td colspan="1"><input type="checkbox" id={{form.skill_disguise_bool}} МАСКИРОВКА </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" style="position:relative; top:10px" id={{form.skill_disguise_total_bonus}} <div style="position:relative; top:-20px; right:-64px">  =ЛВК </div>  </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_disguise_attribute_modifiers}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_disguise_points_skill}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" id={{form.skill_disguise_misc_mod}}  </td>
-    </tr>
-    <tr>
-        <td colspan="1"><input type="checkbox" id={{form.skill_mechanic_bool}} МЕХАНИКА </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" style="position:relative; top:10px" id={{form.skill_mechanic_total_bonus}} <div style="position:relative; top:-20px; right:-64px">  =ЛВК </div>  </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_mechanic_attribute_modifiers}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_mechanic_points_skill}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" id={{form.skill_mechanic_misc_mod}}  </td>
-    </tr>
-    <tr>
-        <td colspan="1"><input type="checkbox" id={{form.skill_grade_bool}} ОЦЕНКА </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" style="position:relative; top:10px" id={{form.skill_grade_total_bonus}} <div style="position:relative; top:-20px; right:-64px">  =ЛВК </div>  </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_grade_attribute_modifiers}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_grade_points_skill}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" id={{form.skill_grade_misc_mod}}  </td>
-    </tr>
-    <tr>
-        <td colspan="1"><input type="checkbox" id={{form.skill_swimming_bool}} ПЛАВАНИЕ </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" style="position:relative; top:10px" id={{form.skill_swimming_total_bonus}} <div style="position:relative; top:-20px; right:-64px">  =ЛВК </div>  </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_swimming_attribute_modifiers}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_swimming_points_skill}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" id={{form.skill_swimming_misc_mod}}  </td>
-    </tr>
-    <tr>
-        <td colspan="1"><input type="checkbox" id={{form.skill_fly_bool}} ПОЛЁТ </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" style="position:relative; top:10px" id={{form.skill_fly_total_bonus}} <div style="position:relative; top:-20px; right:-64px">  =ЛВК </div>  </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_fly_attribute_modifiers}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_fly_points_skill}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" id={{form.skill_fly_misc_mod}}  </td>
-    </tr>
-    <tr>
-        <td colspan="1"><input type="checkbox" id={{form.skill_permeability_bool}} ПРОНИЦАТ<br>ЕЛЬНОСТЬ </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" style="position:relative; top:10px" id={{form.skill_permeability_total_bonus}} <div style="position:relative; top:-20px; right:-64px">  =ЛВК </div>  </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_permeability_attribute_modifiers}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_permeability_points_skill}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" id={{form.skill_permeability_misc_mod}}  </td>
-    </tr>
-    <tr>
-        <td colspan="1"><input type="checkbox" id={{form.skill_profession_one_bool}} ПРОФЕССИЯ <input type="text" style="width:20px" id={{form.skill_profession_one_dop}} </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" style="position:relative; top:10px" id={{form.skill_profession_one_total_bonus}} <div style="position:relative; top:-20px; right:-64px">  =ЛВК </div>  </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_profession_one_attribute_modifiers}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_profession_one_points_skill}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" id={{form.skill_profession_one_misc_mod}}  </td>
-    </tr>
-    <tr>
-        <td colspan="1"><input type="checkbox" id={{form.skill_profession_two_bool}} ПРОФЕССИЯ <input type="text" style="width:20px" id={{form.skill_profession_two_dop}} </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" style="position:relative; top:10px" id={{form.skill_profession_two_total_bonus}} <div style="position:relative; top:-20px; right:-64px">  =ЛВК </div>  </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_profession_two_attribute_modifiers}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_profession_two_points_skill}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" id={{form.skill_profession_two_misc_mod}}  </td>
-    </tr>
-    <tr>
-        <td colspan="1"><input type="checkbox" id={{form.skill_craft_one_bool}} РЕМЕСЛО <input type="text" style="width:20px" id={{form.skill_craft_one_dop}} </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" style="position:relative; top:10px" id={{form.skill_craft_one_total_bonus}} <div style="position:relative; top:-20px; right:-64px">  =ЛВК </div>  </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_craft_one_attribute_modifiers}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_craft_one_points_skill}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" id={{form.skill_craft_one_misc_mod}}  </td>
-    </tr>
-    <tr>
-        <td colspan="1"><input type="checkbox" id={{form.skill_craft_two_bool}} РЕМЕСЛО <input type="text" style="width:20px" id={{form.skill_craft_two_dop}} </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" style="position:relative; top:10px" id={{form.skill_craft_two_total_bonus}} <div style="position:relative; top:-20px; right:-64px">  =ЛВК </div>  </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_craft_two_attribute_modifiers}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_craft_two_points_skill}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" id={{form.skill_craft_two_misc_mod}}  </td>
-    </tr>
-    <tr>
-        <td colspan="1"><input type="checkbox" id={{form.skill_craft_three_bool}} РЕМЕСЛО <input type="text" style="width:20px" id={{form.skill_craft_three_dop}} </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" style="position:relative; top:10px" id={{form.skill_craft_three_total_bonus}} <div style="position:relative; top:-20px; right:-64px">  =ЛВК </div>  </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_craft_three_attribute_modifiers}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_craft_three_points_skill}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" id={{form.skill_craft_three_misc_mod}}  </td>
-    </tr>
-    <tr>
-        <td colspan="1"><input type="checkbox" id={{form.skill_secrecy_bool}} СКРЫТНОСТЬ  </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" style="position:relative; top:10px" id={{form.skill_secrecy_total_bonus}} <div style="position:relative; top:-20px; right:-64px">  =ЛВК </div>  </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_secrecy_attribute_modifiers}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_secrecy_points_skill}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" id={{form.skill_secrecy_misc_mod}}  </td>
-    </tr>
-    <tr>
-        <td colspan="1"><input type="checkbox" id={{form.skill_languachies_bool}} ЯЗЫКОЗНАНИЕ  </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" style="position:relative; top:10px" id={{form.skill_languachies_total_bonus}} <div style="position:relative; top:-20px; right:-64px">  =ЛВК </div>  </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_languachies_attribute_modifiers}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2"  style="position:relative; top:10px" id={{form.skill_languachies_points_skill}} <div style="position:relative; top:-20px; right:-67px">  + </div> </td>
-        <td colspan="1"><input type="text" class="input_one" size="2" id={{form.skill_languachies_misc_mod}}  </td>
-    </tr>
-
-    <table class="table_thirteen">
-        <tr>
-            <td colspan="1"><h2>МОДИФИКАТОРЫ ОБСТОЯТЕЛЬСТВ:</h2></td>
-        </tr>
-        <tr>
-            <td colspan="1"><input type="text" class="input" style="width:500px" size="2" id={{form.circumstance_modifier_one}}   </td>
-        </tr>    
-        <tr>
-            <td colspan="1"><input type="text" class="input" style="width:500px" size="2" id={{form.circumstance_modifier_two}}   </td>
-        </tr>   
-        <tr>
-            <td colspan="1"><h2>ЯЗЫКИ:</h2></td>
-        </tr>
-        <tr>
-            <td colspan="1"><input type="text" class="input" style="width:500px" size="2" id={{form.languachies_one}}   </td>
-        </tr>   
-        <tr>
-            <td colspan="1"><input type="text" class="input" style="width:500px" size="2" id={{form.languachies_two}}   </td>
-        </tr>   
-        <tr>
-            <td colspan="1"><input type="text" class="input" style="width:500px" size="2" id={{form.languachies_three}}   </td>
-        </tr>   
-    </table>
-    
-    <table class="table_fourteen" cellspacing="2">
-            
-        <tr>
-            <th colspan="1" style="position:relative; right:-7px"><h4 class="sagolovok" style="width:130px; height:35px" > <small>ПРЕДМЕТЫ КБ </h4></th>
-            <th colspan="1" style="position:relative; right:-7px"><h2 class="sagolovok" style="width:130px; height:35px" >ТИП </h2></th>
-            <th colspan="1" style="position:relative; right:-7px"><h2 class="sagolovok" style="width:130px; height:35px" >БОНУС </h2></th>
-            <th colspan="1" style="position:relative; right:-7px"><h3 class="sagolovok" style="width:130px; height:38px "> <small >ШТРАФ <br> ЗА ДОСПЕХИ </h3></th>
-            <th colspan="1" style="position:relative; right:-7px"><h3 class="sagolovok" style="width:130px; height:38px" > <small>ПРОВАЛ<br> ЗАКЛИНАНИЯ </h3></th>
-            <th colspan="1" style="position:relative; right:-7px"><h2 class="sagolovok" style="width:130px; height:35px" >ВЕС </h2></th>
-            <th colspan="1" style="position:relative; right:-7px"><h2 class="sagolovok" style="width:130px; height:35px" >СВОЙСТВА </h2></th>
-        </tr>   
-        <tr>
-            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.ac_items_one}} </td>
-            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.bonus_one}} </td>
-            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.type_one}} </td>
-            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.check_penalty_one}} </td>
-            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.spell_failure_one}} </td>
-            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.weight_one}} </td>
-            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.properties_one}} </td>
-        </tr>     
-        <tr>
-            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.ac_items_two}} </td>
-            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.bonus_two}} </td>
-            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.type_two}} </td>
-            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.check_penalty_two}} </td>
-            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.spell_failure_two}} </td>
-            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.weight_two}} </td>
-            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.properties_two}} </td>
+<div class='table-responsive'>
+  <table class="table table-borderless table-hover table-light">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">БАЗОВАЯ СКОРОСТЬ</th>
+        <th scope="col">В БРОНЕ</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th class="table-dark" scope="row" >СКОРОСТЬ</th>
+        <td> <input type="text" placeholder='ФУТЫ КЛЕТКИ'  id={{form.speed_land_base_speed_FT_SQ}} </td>
+        <td> <input type="text" placeholder='ФУТЫ КЛЕТКИ'  id={{form.speed_land_with_armor_FT_SQ}} </td>
+        <td> <input type="text" placeholder='МОДИФИКАТОРЫ' id={{form.speed_land_temp_modifiers}} </td>
         </tr> 
-        <tr>
-            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.ac_items_three}} </td>
-            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.bonus_three}} </td>
-            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.type_three}} </td>
-            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.check_penalty_three}} </td>
-            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.spell_failure_three}} </td>
-            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.weight_three}} </td>
-            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.properties_three}} </td>
-        </tr>    
-        <tr>
-            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.ac_items_four}} </td>
-            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.bonus_four}} </td>
-            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.type_four}} </td>
-            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.check_penalty_four}} </td>
-            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.spell_failure_four}} </td>
-            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.weight_four}} </td>
-            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.properties_four}} </td>
-        </tr>    
-        <tr>
-            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.ac_items_five}} </td>
-            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.bonus_five}} </td>
-            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.type_five}} </td>
-            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.check_penalty_five}} </td>
-            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.spell_failure_five}} </td>
-            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.weight_five}} </td>
-            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.properties_five}} </td>
-        </tr>   
-        <tr>
-            <td colspan="1" style="position:relative; right:-10px" ><h2 class="sagolovok" style="width:130px; height:30x ">ИТОГО</h2></td>
-            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.bonus_totals}} </td>
-            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.type_totals}} </td>
-            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.check_penalty_totals}} </td>
-            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.spell_failure_totals}} </td>
-            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.weight_totals}} </td>
-            <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.properties_totals}} </td>
-        </tr>        
-    
-        <table class="table_fiftine">
-            <tr> 
-                <th colspan="2"><h1 class="sagolovok" style="width:300px; height:35px" > <small>СНАРЯЖЕНИЕ </h1></th>
-            </tr>     
-            <tr>
-                <th colspan="1"><h1 class="" style="width:120px; height:35px; position:relative; right:-15px; top:-10px" > <small>ПРЕДМЕТ </h1></th>   
-                <th colspan="1"><h1 class="" style="width:120px; height:35px; position:relative; right:-15px; top:-10px" > <small>ВЕС </h1></th>       
-            </tr>
-            <tr>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_1}} </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_1_ves}} </td>
-            </tr>
-            <tr>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_2}} </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_2_ves}} </td>
-            </tr>
-            <tr>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_3}} </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_3_ves}} </td>
-            </tr>
-            <tr>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_4}} </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_4_ves}} </td>
-            </tr>
-            <tr>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_5}} </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_5_ves}} </td>
-            </tr>
-            <tr>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_6}} </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_6_ves}} </td>
-            </tr>
-            <tr>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_7}} </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_7_ves}} </td>
-            </tr>
-            <tr>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_8}} </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_8_ves}} </td>
-            </tr>
-            <tr>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_9}} </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_9_ves}} </td>
-            </tr>
-            <tr>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_10}} </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_10_ves}} </td>
-            </tr>
-            <tr>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_11}} </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_11_ves}} </td>
-            </tr>
-            <tr>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_12}} </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_12_ves}} </td>
-            </tr>
-            <tr>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_13}} </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_13_ves}} </td>
-            </tr>
-            <tr>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_14}} </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_14_ves}} </td>
-            </tr>
-            <tr>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_15}} </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_15_ves}} </td>
-            </tr>
-            <tr>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_16}} </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_16_ves}} </td>
-            </tr>
-            <tr>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_17}} </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_17_ves}} </td>
-            </tr>
-            <tr>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_18}} </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_18_ves}} </td>
-            </tr>
-            <tr>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_19}} </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_19_ves}} </td>
-            </tr>
-            <tr>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_20}} </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_20_ves}} </td>
-            </tr>
-            <tr>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_21}} </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_21_ves}} </td>
-            </tr>
-            <tr>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_22}} </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_22_ves}} </td>
-            </tr>
-            <tr>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_23}} </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_23_ves}} </td>
-            </tr>
-            <tr>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_24}} </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_24_ves}} </td>
-            </tr>
-            <tr>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_25}} </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_25_ves}} </td>
-            </tr>
-            <tr>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_26}} </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_26_ves}} </td>
-            </tr>
-            <tr>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_27}} </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_27_ves}} </td>
-            </tr>
-            <tr>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_28}} </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_28_ves}} </td>
-            </tr>
-            <tr>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_29}} </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_29_ves}} </td>
-            </tr>
-            <tr>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:130px;" id={{form.equipment_30}} </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_30_ves}} </td>
-            </tr>
-            <tr>
-                <th colspan="1"><h1 class="sagolovok" style="width:180px; height:35px; position:relative; right:-23px; " > <small>ОБЩИЙ ВЕС </h1></th>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:50px;" id={{form.equipment_total}} </td>
-            </table>
-        <table class="table_sixtien">
-            <tr> <th colspan="1"><h1 class="sagolovok" style="width:400px; height:50px;" > <small>ЧЕРТЫ </h1></th> </tr>
-            <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.feats_1}} </td> </tr>
-            <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.feats_2}} </td> </tr>
-            <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.feats_3}} </td> </tr>
-            <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.feats_4}} </td> </tr>
-            <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.feats_5}} </td> </tr>
-            <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.feats_6}} </td> </tr>
-            <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.feats_7}} </td> </tr>
-            <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.feats_8}} </td> </tr>
-            <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.feats_9}} </td> </tr>
-            <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.feats_10}} </td> </tr>
-            <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.feats_11}} </td> </tr>
-            <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.feats_12}} </td> </tr>
-            <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.feats_13}} </td> </tr>
-            <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.feats_14}} </td> </tr>
-        </table>
-        <table class="table_seventen">
-            <tr> <th colspan="1"><h1 class="sagolovok" style="width:400px; height:50px;" > <small>ОСОБЫЕ СПОСОБНОСТИ </h1></th> </tr>
-                <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities}} </td> </tr>
-                <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_1}} </td> </tr>
-                <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_2}} </td> </tr>
-                <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_3}} </td> </tr>
-                <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_4}} </td> </tr>
-                <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_5}} </td> </tr>
-                <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_6}} </td> </tr>
-                <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_7}} </td> </tr>
-                <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_8}} </td> </tr>
-                <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_9}} </td> </tr>
-                <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_10}} </td> </tr>
-                <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_11}} </td> </tr>
-                <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_12}} </td> </tr>
-                <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_13}} </td> </tr>
-                <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_14}} </td> </tr>
-                <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_15}} </td> </tr>
-                <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_16}} </td> </tr>
-                <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_17}} </td> </tr>
-                <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_18}} </td> </tr>
-                <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_19}} </td> </tr>
-                <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_20}} </td> </tr>
-                <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_21}} </td> </tr>
-                <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_22}} </td> </tr>
-                <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_23}} </td> </tr>
-                <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_24}} </td> </tr> 
-                <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_25}} </td> </tr> 
-                <tr> <td colspan="1" ><input type="text" class="input" size="2" style="width:350px;" id={{form.special_abilities_26}} </td> </tr> 
-            </table>
-    
-        <table class="table_eighteenth"> <!-- ЗАКЛИНАНИЯ-->
-            <tr> <!--<th colspan="5"><h1 class="sagolovok" style="width:300px; height:50px;" > <small> ЗАКЛИНАНИЯ </h1></th> </tr>-->
-                <caption style="background: black; color: white; height:50px; width:"> <h2 style="align: center; margin-top:10px">ЗАКЛИНАНИЯ</caption>
-            <tr>
-                <th><h6>ИЗВЕСТНЫЕ <br> ЗАКЛИНАНИЯ</th> <th><h6>СЛ<br>ИСПЫТАНИЯ</th> <th><h6> <b>КРУГ</b></th> <th><h6>ЗАКЛИНАНИЙ <br> В ДЕНЬ</th> <th><h6>ДОП. <br> ЗАКЛИНАНИЯ</th>
-            </tr>
-            <tr>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_known_lvl0}} </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spell_save_dc_lvl0}} </td>
-                <td> 0 </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_per_day_lvl0}} </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_bonus_lvl0}} </td>
-            </tr>
-            <tr>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_known_lvl1}} </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spell_save_dc_lvl1}} </td>
-                <td> 1 </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_per_day_lvl1}} </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_bonus_lvl1}} </td>
-            </tr>
-            <tr>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_known_lvl2}} </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spell_save_dc_lvl2}} </td>
-                <td> 2 </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_per_day_lvl2}} </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_bonus_lvl2}} </td>
-            </tr>
-            <tr>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_known_lvl3}} </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spell_save_dc_lvl3}} </td>
-                <td> 3 </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_per_day_lvl3}} </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_bonus_lvl3}} </td>
-            </tr>
-            <tr>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_known_lvl4}} </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spell_save_dc_lvl4}} </td>
-                <td> 4 </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_per_day_lvl4}} </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_bonus_lvl4}} </td>
-            </tr>
-            <tr>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_known_lvl5}} </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spell_save_dc_lvl5}} </td>
-                <td> 5 </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_per_day_lvl5}} </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_bonus_lvl5}} </td>
-            </tr>
-            <tr>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_known_lvl6}} </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spell_save_dc_lvl6}} </td>
-                <td> 6 </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_per_day_lvl6}} </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_bonus_lvl6}} </td>
-            </tr>
-            <tr>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_known_lvl7}} </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spell_save_dc_lvl7}} </td>
-                <td> 7 </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_per_day_lvl7}} </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_bonus_lvl7}} </td>
-            </tr>
-            <tr>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_known_lvl8}} </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spell_save_dc_lvl8}} </td>
-                <td> 8 </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_per_day_lvl8}} </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_bonus_lvl8}} </td>
-            </tr>
-            <tr>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_known_lvl9}} </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spell_save_dc_lvl9}} </td>
-                <td> 9 </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_per_day_lvl9}} </td>
-                <td colspan="1" ><input type="text" class="input" size="2" style="width:70px;" id={{form.spells_bonus_lvl9}} </td>
-            </tr>
-            <tr>
-                <td colspan="5" ><input type="text" class="input" size="2" style="width:300px;" placeholder="МОДИФИКАТОРЫ ОБСТОЯТЕЛЬСТВ"id={{form.conditional_modifiers}} </td>
-            </tr>
-        </table>
-
-    </div>
+    </tbody>
+    <thead>
+      <tr>
+        <th scope="col">ПОЛЁТ МАНЕВРЕННОСТЬ</th>
+        <th scope="col">ПЛАВАНИЕ</th>
+        <th scope="col">ЛАЗАНИЕ</th>
+        <th scope="col">РЫТЬЁ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
         
+        <td> <input type="text" placeholder='ФУТЫ '  id={{form.speed_land_maneuverability_FT}} </td>
+        <td> <input type="text" placeholder='ФУТЫ '  id={{form.speed_land_swim_FT}} </td>
+        <td> <input type="text" placeholder='ФУТЫ' id={{form.speed_land_climb_FT}} </td>
+        <td> <input type="text" placeholder='ФУТЫ' id={{form.speed_land_burrow_FT}} </td>
+        
+        </tr> 
+    </tbody>
+  </table>
+</div>
+
+  <div class='table-responsive'>
+  <table class="table table-borderless table-hover  ">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">ВСЕГО</th>
+        <th scope="col"></th>
+        <th scope="col">БОНУС ДОСПЕХА</th>
+        <th scope="col"></th>
+        <th scope="col">БОНУС ЩИТА</th>
+        <th scope="col"></th>
+        <th scope="col">МОДИФ. ЛВК</th>
+        <th scope="col"></th>
+        <th scope="col">МОДИФ. РАЗМЕРА</th>
+        <th scope="col"></th>
+        <th scope="col">ЕСТЕСТВ. БРОНЯ</th>
+        <th scope="col"></th>
+        <th scope="col">БОНУС ОТРАЖЕНИЯ</th>
+        <th scope="col"></th>
+        <th scope="col">ПРОЧИЕ МОДИФ.</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th class="table-dark" scope="row" >КЛАСС БРОНИ</th>
+        <td> <input type="text" style='width:70px'  id={{form.armor_class_total}} </td>
+        <td nowrap>  + </td>
+        <td> <input style='width:70px'type="text"  id={{form.armor_class_bonus_armor}} </td>
+        <td nowrap>  + </td>
+        <td> <input style='width:70px'type="text"  id={{form.armor_class_shield_bonus}} </td>
+        <td nowrap>  + </td>
+        <td> <input style='width:70px'type="text"  id={{form.armor_class_dex_modifier}} </td>
+        <td nowrap>  + </td>
+        <td> <input style='width:70px'type="text"  id={{form.armor_class_size_modifier}} </td>
+        <td nowrap>  + </td>
+        <td> <input style='width:70px'type="text"  id={{form.armor_class_natural_armor}} </td>
+        <td nowrap>  + </td>
+        <td> <input style='width:70px'type="text"  id={{form.armor_class_deflection_modifier}} </td>
+        <td nowrap>  + </td>
+        <td> <input style='width:70px' type="text"  id={{form.armor_class_misc_modifier}} </td>
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+<div class='table-responsive'>
+  <table class="table table-borderless table-hover  ">
+    <tbody>
+      <tr>
+        <th  class="table-dark" data-tooltip="КЛАСС БРОНИ" scope="row" >КАСАНИЕ</th>
+        <td> <input type="text" style='width:70px'  id={{form.touch_armor_class}} </td>
+        <th class="table-dark" data-tooltip="КЛАСС БРОНИ" scope="row" >ВРАСПЛОХ</th>
+        <td> <input type="text" style='width:70px'  id={{form.flat_footed_armor_class}} </td>
+        <td> <input type="text" style='width:300px;' placeholder='МОДИФИКАТОРЫ' id={{form.armor_class_modifier}} </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<div class='table-responsive'>
+  <table class="table table-borderless table-hover table-info  ">
+    <thead>
+      <tr>
+        <th scope="col">ИСПЫТАНИЯ</th>
+        <th scope="col">ВСЕГО</th>
+        <th scope="col">БАЗОВЫЙ</th>
+        <th scope="col">МОДИФ.ХАРАКТЕР.</th>
+        <th scope="col">МАГИЧЕСКИЙ МОДИФ.</th>
+        <th scope="col">ПРОЧИЕ МОДИФ.</th>
+        <th scope="col">ВРЕМЕННЫЕ МОДИФ.</th>
+        <th scope="col"></th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th  class="table-dark" data-tooltip="ВЫНОСЛИВОСТЬ" scope="row" >СТОЙКОСТЬ</th>
+        <td> <input type="text" style='width:70px'  id={{form.fortitude_total}} </td>
+        <td> <input type="text" style='width:70px'  id={{form.fortitude_base_save}} </td>
+        <td> <input type="text" style='width:70px'  id={{form.fortitude_ability_modifier}} </td>
+        <td> <input type="text" style='width:70px'  id={{form.fortitude_magic_modifier}} </td>
+        <td> <input type="text" style='width:70px'  id={{form.fortitude_misc_modifier}} </td>
+        <td> <input type="text" style='width:70px'  id={{form.fortitude_temporary_modifier}} </td>
+        <td rowspan="3 " > <input type="text"  style='width:150px; height:100px' placeholder='МОДИФИКАТОРЫ' id={{form.saving_throws_modifier}} </td>
+        
+      </tr>
+      <tr>
+        <th  class="table-dark" data-tooltip="ЛОВКОСТЬ" scope="row" >РЕАКЦИЯ</th>
+        <td> <input type="text" style='width:70px'  id={{form.reflex_total}} </td>
+        <td> <input type="text" style='width:70px'  id={{form.reflex_base_save}} </td>
+        <td> <input type="text" style='width:70px'  id={{form.reflex_ability_modifier}} </td>
+        <td> <input type="text" style='width:70px'  id={{form.reflex_magic_modifier}} </td>
+        <td> <input type="text" style='width:70px'  id={{form.reflex_misc_modifier}} </td>
+        <td> <input type="text" style='width:70px'  id={{form.reflex_temporary_modifier}} </td>
+      </tr>
+      <tr>
+        <th  class="table-dark" data-tooltip="МУДРОСТЬ" scope="row" >ВОЛЯ</th>
+        <td> <input type="text" style='width:70px'  id={{form.will_total}} </td>
+        <td> <input type="text" style='width:70px'  id={{form.will_base_save}} </td>
+        <td> <input type="text" style='width:70px'  id={{form.will_ability_modifier}} </td>
+        <td> <input type="text" style='width:70px'  id={{form.will_magic_modifier}} </td>
+        <td> <input type="text" style='width:70px'  id={{form.will_misc_modifier}} </td>
+        <td> <input type="text" style='width:70px'  id={{form.will_temporary_modifier}} </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class='table-responsive'>
+  <table class="table table-borderless table-hover  ">
+    <tbody>
+      <tr>
+        <th  class="table-dark"  scope="row" >БАЗОВЫЙ  МОДИФИКАТОР АТАКИ</th>
+        <td> <input type="text" style='width:70px'  id={{form.base_attack_bonus}} </td>
+        <th class="table-dark"  scope="row" >УСТОЙЧИВОСТЬ  К МАГИИ</th>
+        <td> <input type="text" style='width:70px'  id={{form.spell_resistance}} </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class='table-responsive'>
+  <table class="table table-borderless table-hover  ">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">ВСЕГО</th>
+        <th scope="col"></th>
+        <th scope="col">МБА</th>
+        <th scope="col"></th>
+        <th scope="col">МОДИФ. СИЛ</th>
+        <th scope="col"></th>
+        <th scope="col">МОДИФ. РАЗМЕРА</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th class="table-dark" scope="row" >МБМ</th>
+        <td> <input type="text" style='width:70px'  id={{form.cmb_total}} </td>
+        <td nowrap>  + </td>
+        <td> <input style='width:90px'type="text"  id={{form.cmb_base_attack_bonus}} </td>
+        <td nowrap>  + </td>
+        <td> <input style='width:90px'type="text"  id={{form.cmb_strength_modifier}} </td>
+        <td nowrap>  + </td>
+        <td> <input style='width:90px'type="text"  id={{form.cmb_size_modifier}} </td>
+        <td > <input style='width:200px; 'type="text" placeholder='МОДИФИКАТОРЫ' id={{form.cmb_modifier}} </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class='table-responsive'>
+  <table class="table table-borderless table-hover  ">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">ВСЕГО</th>
+        <th scope="col"></th>
+        <th scope="col">МБА</th>
+        <th scope="col"></th>
+        <th scope="col">МОДИФ. СИЛ</th>
+        <th scope="col"></th>
+        <th scope="col">МОДИФ. ЛВК</th>
+        <th scope="col"></th>
+        <th scope="col">МОДИФ. РАЗМЕРА</th>
+        <th scope="col"></th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th class="table-dark" scope="row" >МБМ</th>
+        <td> <input type="text" style='width:70px'  id={{form.cmd_total}} </td>
+        <td nowrap>  + </td>
+        <td> <input style='width:90px'type="text"  id={{form.cmd_base_attack_bonus}} </td>
+        <td nowrap>  + </td>
+        <td> <input style='width:90px'type="text"  id={{form.cmd_dexterity_modifier}} </td>
+        <td nowrap>  + </td>
+        <td> <input style='width:90px'type="text"  id={{form.cmd_size_modifier}} </td>
+        <td nowrap>  + </td>
+        <td > <input style='width:90px;; 'type="text"  id={{form.cmd_strength_modifier}} </td>
+        <td nowrap>  + 10 </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class='table-responsive'>
+  <table class="table table-borderless table-hover table-success ">
+    <thead>
+      <tr>
+        <th colspan = '4' class="table-dark" scope="col">ОРУЖИЕ</th>
+        <th colspan = '1' class="table-dark" scope="col">МОДИФ. АТАКИ</th>
+        <th colspan = '1' class="table-dark" scope="col">КРИТ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        
+        <td colspan = '4'> <input type="text" style='width:440px'  id={{form.weapon_one_name}} </td>
+        <td colspan = '1'> <input style='width:110px'type="text"  id={{form.weapon_one_attack_bonus}} </td>
+        <td colspan = '1'> <input style='width:110px'type="text"  id={{form.weapon_one_critical}} </td>
+      </tr>
+      <tr>
+      </tbody>
+    <thead>
+      <tr>
+        <th colspan = '1' class="table-dark" scope="col">ТИП</th>
+        <th colspan = '1' class="table-dark" scope="col">ДИСТАНТ.</th>
+        <th colspan = '2' class="table-dark" scope="col">БОЕПРИПАСЫ</th>
+        <th colspan = '2' class="table-dark" scope="col">УРОН</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+        
+        <td colspan = '1'> <input type="text" style='width:110px'  id={{form.weapon_one_type}} </td>
+        <td colspan = '1'> <input style='width:110px'type="text"  id={{form.weapon_one_range}} </td>
+        <td colspan = '2'> <input style='width:220px'type="text"  id={{form.weapon_one_ammunition}} </td>
+        <td colspan = '2'> <input style='width:220px'type="text"  id={{form.weapon_one_damage}} </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class='table-responsive'>
+  <table class="table table-borderless table-hover table-success ">
+    <thead>
+      <tr>
+        <th colspan = '4' class="table-dark" scope="col">ОРУЖИЕ</th>
+        <th colspan = '1' class="table-dark" scope="col">МОДИФ. АТАКИ</th>
+        <th colspan = '1' class="table-dark" scope="col">КРИТ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        
+        <td colspan = '4'> <input type="text" style='width:440px'  id={{form.weapon_two_name}} </td>
+        <td colspan = '1'> <input style='width:110px'type="text"  id={{form.weapon_two_attack_bonus}} </td>
+        <td colspan = '1'> <input style='width:110px'type="text"  id={{form.weapon_two_critical}} </td>
+      </tr>
+      <tr>
+      </tbody>
+    <thead>
+      <tr>
+        <th colspan = '1' class="table-dark" scope="col">ТИП</th>
+        <th colspan = '1' class="table-dark" scope="col">ДИСТАНТ.</th>
+        <th colspan = '2' class="table-dark" scope="col">БОЕПРИПАСЫ</th>
+        <th colspan = '2' class="table-dark" scope="col">УРОН</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+        
+        <td colspan = '1'> <input type="text" style='width:110px'  id={{form.weapon_two_type}} </td>
+        <td colspan = '1'> <input style='width:110px'type="text"  id={{form.weapon_two_range}} </td>
+        <td colspan = '2'> <input style='width:220px'type="text"  id={{form.weapon_two_ammunition}} </td>
+        <td colspan = '2'> <input style='width:220px'type="text"  id={{form.weapon_two_damage}} </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class='table-responsive'>
+  <table class="table table-borderless table-hover table-success ">
+    <thead>
+      <tr>
+        <th colspan = '4' class="table-dark" scope="col">ОРУЖИЕ</th>
+        <th colspan = '1' class="table-dark" scope="col">МОДИФ. АТАКИ</th>
+        <th colspan = '1' class="table-dark" scope="col">КРИТ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        
+        <td colspan = '4'> <input type="text" style='width:440px'  id={{form.weapon_three_name}} </td>
+        <td colspan = '1'> <input style='width:110px'type="text"  id={{form.weapon_three_attack_bonus}} </td>
+        <td colspan = '1'> <input style='width:110px'type="text"  id={{form.weapon_three_critical}} </td>
+      </tr>
+      <tr>
+      </tbody>
+    <thead>
+      <tr>
+        <th colspan = '1' class="table-dark" scope="col">ТИП</th>
+        <th colspan = '1' class="table-dark" scope="col">ДИСТАНТ.</th>
+        <th colspan = '2' class="table-dark" scope="col">БОЕПРИПАСЫ</th>
+        <th colspan = '2' class="table-dark" scope="col">УРОН</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+        
+        <td colspan = '1'> <input type="text" style='width:110px'  id={{form.weapon_three_type}} </td>
+        <td colspan = '1'> <input style='width:110px'type="text"  id={{form.weapon_three_range}} </td>
+        <td colspan = '2'> <input style='width:220px'type="text"  id={{form.weapon_three_ammunition}} </td>
+        <td colspan = '2'> <input style='width:220px'type="text"  id={{form.weapon_three_damage}} </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class='table-responsive'>
+  <table class="table table-borderless table-hover table-success ">
+    <thead>
+      <tr>
+        <th colspan = '4' class="table-dark" scope="col">ОРУЖИЕ</th>
+        <th colspan = '1' class="table-dark" scope="col">МОДИФ. АТАКИ</th>
+        <th colspan = '1' class="table-dark" scope="col">КРИТ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        
+        <td colspan = '4'> <input type="text" style='width:440px'  id={{form.weapon_four_name}} </td>
+        <td colspan = '1'> <input style='width:110px'type="text"  id={{form.weapon_four_attack_bonus}} </td>
+        <td colspan = '1'> <input style='width:110px'type="text"  id={{form.weapon_four_critical}} </td>
+      </tr>
+      <tr>
+      </tbody>
+    <thead>
+      <tr>
+        <th colspan = '1' class="table-dark" scope="col">ТИП</th>
+        <th colspan = '1' class="table-dark" scope="col">ДИСТАНТ.</th>
+        <th colspan = '2' class="table-dark" scope="col">БОЕПРИПАСЫ</th>
+        <th colspan = '2' class="table-dark" scope="col">УРОН</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+        
+        <td colspan = '1'> <input type="text" style='width:110px'  id={{form.weapon_four_type}} </td>
+        <td colspan = '1'> <input style='width:110px'type="text"  id={{form.weapon_four_range}} </td>
+        <td colspan = '2'> <input style='width:220px'type="text"  id={{form.weapon_four_ammunition}} </td>
+        <td colspan = '2'> <input style='width:220px'type="text"  id={{form.weapon_four_damage}} </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class='table-responsive'>
+  <table class="table table-borderless table-hover table-warning ">
+    <thead>
+      <tr>
+        <th colspan = '8' style="text-align:center;"class="table-dark" scope="col">НАВЫКИ</th>
+      </tr>
+    </thead>
+    <thead>
+      <tr>
+        <th colspan = '1'  scope="col">НАВЫКИ</th>
+        <th colspan = '1'  scope="col">ОБЩИЙ БОНУС</th>
+        <th colspan = '1'  scope="col"> </th>
+        <th colspan = '1'  scope="col">МОДИФ. ХАРАКТЕР.</th>
+        <th colspan = '1'  scope="col"> </th>
+        <th colspan = '1'  scope="col">ПУНКТЫ</th>
+        <th colspan = '1'  scope="col"> </th>
+        <th colspan = '1'  scope="col">ПРОЧИЕ МОДИФ.</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        
+        <td colspan="1"><input type="checkbox" id={{form.skill_acrobatics_bool}} АКРОБАТИКА </td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_acrobatics_total_bonus}} </td>
+        <td colspan = '1'>=ЛВК</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_acrobatics_attribute_modifiers}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_acrobatics_points_skill}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_acrobatics_misc_mod}} </td>
+      </tr>
+      <tr>
+        
+        <td colspan="1"><input type="checkbox" id={{form.skill_bluff_bool}} БЛЕФ </td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_bluff_total_bonus}} </td>
+        <td colspan = '1'>=ЛВК</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_bluff_attribute_modifiers}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_bluff_points_skill}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_bluff_misc_mod}} </td>
+      </tr>
+      <tr>
+        <td colspan="1"><input type="checkbox" id={{form.skill_horseback_riding_bool}} ВЕРХОВАЯ ЕЗДА </td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_horseback_riding_total_bonus}} </td>
+        <td colspan = '1'>=ЛВК</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_horseback_riding_attribute_modifiers}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_horseback_riding_points_skill}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_horseback_riding_misc_mod}} </td>
+      </tr>
+      <tr>
+        <td colspan="1"><input type="checkbox" id={{form.skill_attention_bool}} ВНИМАНИЕ</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_attention_total_bonus}} </td>
+        <td colspan = '1'>=ЛВК</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_attention_misc_attribute_modifiers}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_attention_points_skill}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_attention_misc_mod}} </td>
+      </tr>
+      <tr>
+        <td colspan="1"><input type="checkbox" id={{form.skill_survival_bool}} ВЫЖИВАЕМОСТЬ</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_survival_total_bonus}} </td>
+        <td colspan = '1'>=ЛВК</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_survival_attribute_modifiers}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_survival_points_skill}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_survival_misc_mod}} </td>
+      </tr>
+      <tr>
+        <td colspan="1"><input type="checkbox" id={{form.skill_diplomacy_device_bool}} ДИПЛОМАТИЯ</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_diplomacy_device_total_bonus}} </td>
+        <td colspan = '1'>=ЛВК</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_diplomacy_device_attribute_modifiers}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_diplomacy_device_points_skill}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_diplomacy_device_misc_mod}} </td>
+      </tr>
+      <tr>
+        <td colspan="1"><input type="checkbox" id={{form.skill_training_bool}} ДРЕССИРОВКА*</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_training_total_bonus}} </td>
+        <td colspan = '1'>=ЛВК</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_training_attribute_modifiers}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_training_points_skill}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_training_misc_mod}} </td>
+      </tr>
+      <tr>
+        <td colspan="1"><input type="checkbox" id={{form.skill_intimidation_artist_bool}} ЗАПУГИВАНИЕ</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_intimidation_artist_total_bonus}} </td>
+        <td colspan = '1'>=ЛВК</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_intimidation_artist_attribute_modifiers}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_intimidation_artist_points_skill}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_intimidation_artist_misc_mod}} </td>
+      </tr>
+      <tr>
+        <td colspan="1" data-tooltip="КЛАСС БРОНИ"><input type="checkbox"  id={{form.skill_elite_bool}} ВЫСШИЙ СВЕТ*</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_elite_total_bonus}} </td>
+        <td colspan = '1'>=ИНТ</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_elite_attribute_modifiers}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_elite_points_skill}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_elite_misc_mod}} </td>
+      </tr>
+      <tr>
+        <td colspan="1"data-tooltip="КЛАСС БРОНИ"><input type="checkbox" id={{form.skill_geography_bool}}ГЕОГРАФИЯ*</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_geography_total_bonus}} </td>
+        <td colspan = '1'>=ИНТ</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_geography_attribute_modifiers}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_geography_points_skill}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_geography_misc_mod}} </td>
+      </tr>
+      <tr>
+        <td colspan="1"data-tooltip="КЛАСС БРОНИ"><input type="checkbox" id={{form.skill_engineering_bool}}ИНЖЕНЕРНОЕ ДЕЛО*</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_engineering_total_bonus}} </td>
+        <td colspan = '1'>=ИНТ</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_engineering_attribute_modifiers}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_engineering_points_skill}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_engineering_misc_mod}} </td>
+      </tr>
+      <tr>
+        <td colspan="1"data-tooltip="КЛАСС БРОНИ"><input type="checkbox" id={{form.skill_history_bool}} ИСТОРИЯ*</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_history_total_bonus}} </td>
+        <td colspan = '1'>=ИНТ</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_history_attribute_modifiers}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_history_points_skill}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_history_misc_mod}} </td>
+      </tr>
+      <tr>
+        <td colspan="1"data-tooltip="КЛАСС БРОНИ"><input type="checkbox" id={{form.skill_local_history_bool}} КРАЕВЕДЕНИЕ*</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_local_history_total_bonus}} </td>
+        <td colspan = '1'>=ИНТ</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_local_history_attribute_modifiers}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_local_history_points_skill}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_local_history_misc_mod}} </td>
+      </tr>
+      <tr>
+        <td colspan="1"data-tooltip="КЛАСС БРОНИ"><input type="checkbox" id={{form.skill_magic_bool}} МАГИЯ*</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_magic_total_bonus}} </td>
+        <td colspan = '1'>=ИНТ</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_magic_attribute_modifiers}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_magic_points_skill}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_magic_misc_mod}} </td>
+      </tr>
+      <tr>
+        <td colspan="1"data-tooltip="КЛАСС БРОНИ"><input type="checkbox" id={{form.skill_plan_bool}} ПЛАНЫ*</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_plan_total_bonus}} </td>
+        <td colspan = '1'>=ИНТ</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_plan_attribute_modifiers}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_plan_points_skill}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_plan_misc_mod}} </td>
+      </tr>
+      <tr>
+        <td colspan="1"data-tooltip="КЛАСС БРОНИ"><input type="checkbox" id={{form.skill_dungeons_bool}} ПОДЗЕМЕЛЬЯ*</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_dungeons_total_bonus}} </td>
+        <td colspan = '1'>=ИНТ</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_dungeons_attribute_modifiers}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_dungeons_points_skill}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_dungeons_misc_mod}} </td>
+      </tr>
+      <tr>
+        <td colspan="1"data-tooltip="КЛАСС БРОНИ"><input type="checkbox" id={{form.skill_nature_bool}} ПРИРОДА*</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_nature_total_bonus}} </td>
+        <td colspan = '1'>=ИНТ</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_nature_attribute_modifiers}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_nature_points_skill}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_nature_misc_mod}} </td>
+      </tr>
+      <tr>
+        <td colspan="1"data-tooltip="КЛАСС БРОНИ"><input type="checkbox" id={{form.skill_religion_bool}} РЕЛИГИЯ*</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_religion_total_bonus}} </td>
+        <td colspan = '1'>=ИНТ</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_religion_attribute_modifiers}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_religion_points_skill}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_religion_misc_mod}} </td>
+      </tr>
+      <tr>
+        <td colspan="1"><input type="checkbox" id={{form.skill_resourcefulness_bool}} ИЗВОРОТЛИВОСТЬ</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_resourcefulness_total_bonus}} </td>
+        <td colspan = '1'>=ЛВК</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_resourcefulness_attribute_modifiers}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_resourcefulness_points_skill}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_resourcefulness_misc_mod}} </td>
+      </tr>
+      <tr>
+        <td colspan="1"><input type="checkbox" id={{form.skill_resourcefulness_bool}} ИСПОЛНЕНИЕ <input style='width:150px'type="text"  id={{form.skill_performance_dop}}</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_performance_total_bonus}} </td>
+        <td colspan = '1'>=ХАР</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_performance_attribute_modifiers}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_performance_points_skill}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_performance_misc_mod}} </td>
+      </tr>
+      <tr>
+        <td colspan="1"><input type="checkbox" id={{form.skill_performance_one_bool}} ИСПОЛНЕНИЕ <input style='width:150px'type="text"  id={{form.skill_performance_one_dop}}</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_performance_one_total_bonus}} </td>
+        <td colspan = '1'>=ХАР</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_performance_one_attribute_modifiers}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_performance_one_points_skill}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_performance_one_misc_mod}} </td>
+      </tr>
+      <tr>
+        <td colspan="1"><input type="checkbox" id={{form.skill_use_magic_devices_bool}} ИСПОЛЬЗОВАНИЕ МАГИЧЕСКИЙ УСТРОЙСТВ </td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_use_magic_devices_total_bonus}} </td>
+        <td colspan = '1'>=ХАР</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_use_magic_devices_attribute_modifiers}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_use_magic_devices_points_skill}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_use_magic_devices_misc_mod}} </td>
+      </tr>
+      <tr>
+        <td colspan="1"><input type="checkbox" id={{form.skill_witchcraft_bool}} КОЛДОВСТВО*  </td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_witchcraft_total_bonus}} </td>
+        <td colspan = '1'>=ИНТ</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_witchcraft_attribute_modifiers}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_witchcraft_points_skill}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_witchcraft_misc_mod}} </td>
+      </tr>
+      <tr>
+        <td colspan="1"><input type="checkbox" id={{form.skill_climbing_bool}} ЛАЗАНИЕ</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_climbing_total_bonus}} </td>
+        <td colspan = '1'>=СИЛ</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_climbing_attribute_modifiers}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_climbing_points_skill}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_climbing_misc_mod}} </td>
+      </tr>
+      <tr>
+        <td colspan="1"><input type="checkbox" id={{form.skill_hilling_bool}} ЛЕЧЕНИЕ</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_hilling_total_bonus}} </td>
+        <td colspan = '1'>=МДР</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_hilling_attribute_modifiers}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_hilling_points_skill}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_hilling_misc_mod}} </td>
+      </tr>
+      <tr>
+        <td colspan="1"><input type="checkbox" id={{form.skill_sleight_of_hand_bool}} ЛОВКОСТЬ РУК*</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_sleight_of_hand_total_bonus}} </td>
+        <td colspan = '1'>=ЛВК</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_sleight_of_hand_attribute_modifiers}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_sleight_of_hand_points_skill}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_sleight_of_hand_misc_mod}} </td>
+      </tr>
+      <tr>
+        <td colspan="1"><input type="checkbox" id={{form.skill_disguise_bool}}  МАСКИРОВКА </td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_disguise_total_bonus}} </td>
+        <td colspan = '1'>=ХАР</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_disguise_attribute_modifiers}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_disguise_points_skill}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_disguise_misc_mod}} </td>
+      </tr>
+      <tr>
+        <td colspan="1"><input type="checkbox" id={{form.skill_mechanic_bool}}  МЕХАНИКА* </td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_mechanic_total_bonus}} </td>
+        <td colspan = '1'>=ЛВК</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_mechanic_attribute_modifiers}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_mechanic_points_skill}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_mechanic_misc_mod}} </td>
+      </tr>
+      <tr>
+        <td colspan="1"><input type="checkbox" id={{form.skill_grade_bool}} ОЦЕНКА </td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_grade_total_bonus}} </td>
+        <td colspan = '1'>=ИНТ</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_grade_attribute_modifiers}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_grade_points_skill}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_grade_misc_mod}} </td>
+      </tr>
+      <tr>
+        <td colspan="1"><input type="checkbox" id={{form.skill_swimming_bool}} ПЛАВАНИЕ </td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_swimming_total_bonus}} </td>
+        <td colspan = '1'>=СИЛ</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_swimming_attribute_modifiers}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_swimming_points_skill}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_swimming_misc_mod}} </td>
+      </tr>
+      <tr>
+        <td colspan="1"><input type="checkbox" id={{form.skill_fly_bool}} ПОЛЁТ </td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_fly_total_bonus}} </td>
+        <td colspan = '1'>=ЛВК</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_fly_attribute_modifiers}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_fly_points_skill}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_fly_misc_mod}} </td>
+      </tr>
+      <tr>
+        <td colspan="1"><input type="checkbox" id={{form.skill_permeability_bool}} ПРОНИЦАТЕЛЬНОСТЬ </td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_permeability_total_bonus}} </td>
+        <td colspan = '1'>=МДР</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_permeability_attribute_modifiers}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_permeability_points_skill}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_permeability_misc_mod}} </td>
+      </tr>
+      <tr>
+        <td colspan="1"><input type="checkbox" id={{form.skill_profession_one_bool}} ПРОФЕССИЯ* <input style='width:150px'type="text"  id={{form.skill_profession_one_dop}}</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_profession_one_total_bonus}} </td>
+        <td colspan = '1'>=МДР</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_profession_one_attribute_modifiers}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_profession_one_points_skill}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_profession_one_misc_mod}} </td>
+      </tr>
+      <tr>
+        <td colspan="1"><input type="checkbox" id={{form.skill_profession_two_bool}} ПРОФЕССИЯ* <input style='width:150px'type="text"  id={{form.skill_profession_two_dop}}</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_profession_two_total_bonus}} </td>
+        <td colspan = '1'>=МДР</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_profession_two_attribute_modifiers}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_profession_two_points_skill}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_profession_two_misc_mod}} </td>
+      </tr>
+      <tr>
+        <td colspan="1"><input type="checkbox" id={{form.skill_craft_one_bool}} РЕМЕСЛО <input style='width:150px'type="text"  id={{form.skill_craft_one_dop}}</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_craft_one_total_bonus}} </td>
+        <td colspan = '1'>=ИНТ</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_craft_one_attribute_modifiers}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_craft_one_points_skill}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_craft_one_misc_mod}} </td>
+      </tr>
+      <tr>
+        <td colspan="1"><input type="checkbox" id={{form.skill_craft_two_bool}} РЕМЕСЛО <input style='width:150px'type="text"  id={{form.skill_craft_two_dop}}</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_craft_two_total_bonus}} </td>
+        <td colspan = '1'>=ИНТ</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_craft_two_attribute_modifiers}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_craft_two_points_skill}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_craft_two_misc_mod}} </td>
+      </tr>
+      <tr>
+        <td colspan="1"><input type="checkbox" id={{form.skill_craft_three_bool}} РЕМЕСЛО <input style='width:150px'type="text"  id={{form.skill_craft_three_dop}}</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_craft_three_total_bonus}} </td>
+        <td colspan = '1'>=ИНТ</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_craft_three_attribute_modifiers}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_craft_three_points_skill}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_craft_three_misc_mod}} </td>
+      </tr>
+      <tr>
+        <td colspan="1"><input type="checkbox" id={{form.skill_secrecy_bool}} СКРЫТНОСТЬ </td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_secrecy_total_bonus}} </td>
+        <td colspan = '1'>=ЛВК</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_secrecy_attribute_modifiers}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_secrecy_points_skill}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_secrecy_misc_mod}} </td>
+      </tr>
+      <tr>
+        <td colspan="1"><input type="checkbox" id={{form.skill_languachies_bool}} ЯЗЫКОЗНАНИЕ </td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_languachies_total_bonus}} </td>
+        <td colspan = '1'>=ИНТ</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_languachies_attribute_modifiers}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_languachies_points_skill}} </td>
+        <td colspan = '1'>+</td>
+        <td colspan = '1'> <input style='width:150px'type="text"  id={{form.skill_languachies_misc_mod}} </td>
+      </tr>
+      <tr>
+      </tbody>
+      <div class='table-responsive'>
+        <table class="table table-borderless table-hover  ">
+          <thead>
+            <tr>
+              <th  class="table-dark" scope="col">МОДИФИКАТОРЫ ОБСТОЯТЕЛЬСТВ: </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td > <input type="text" style='width:80%;'  id={{form.circumstance_modifier_one}} </td>
+            </tr>
+            <tr>
+              <th  class="table-dark" scope="col">ЯЗЫКИ: </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td > <input type="text" style='width:80%;'  id={{form.circumstance_modifier_two}} </td>
+            </tr>
+            <tr>
+            </tbody>
+          
+        </table>
+      </div>
+      <div class='table-responsive'>
+        <table class="table table-borderless table-hover table-danger ">
+          <thead>
+            <tr>
+              <th colspan = '2' class="table-dark" scope="col">ПРЕДМЕТЫ КБ</th>
+              <th colspan = '1' class="table-dark" scope="col">БОНУС</th>
+              <th colspan = '1' class="table-dark" scope="col">ТИП</th>
+              <th colspan = '1' class="table-dark" scope="col">ШТРАФ ЗА ДОСПЕХИ</th>
+              <th colspan = '1' class="table-dark" scope="col">ПРОВАЛ ЗАКЛИНАНИЯ</th>
+              <th colspan = '1' class="table-dark" scope="col">ВЕС</th>
+              <th colspan = '1' class="table-dark" scope="col">СВОЙСТВА</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td colspan = '2'> <input type="text" style='width:100%px'  id={{form.ac_items_one}} </td>
+              <td colspan = '1'> <input type="text" style='width:100%px'  id={{form.bonus_one}} </td>
+              <td colspan = '1'> <input type="text" style='width:100%px'  id={{form.type_one}} </td>
+              <td colspan = '1'> <input type="text" style='width:100%px'  id={{form.check_penalty_one}} </td>
+              <td colspan = '1'> <input type="text" style='width:100%px'  id={{form.spell_failure_one}} </td>
+              <td colspan = '1'> <input type="text" style='width:100%px'  id={{form.weight_one}} </td>
+              <td colspan = '1'> <input type="text" style='width:100%px'  id={{form.properties_one}} </td>
+            </tr>
+            <tr>
+              <td colspan = '2'> <input type="text" style='width:100%px'  id={{form.ac_items_two}} </td>
+              <td colspan = '1'> <input type="text" style='width:100%px'  id={{form.bonus_two}} </td>
+              <td colspan = '1'> <input type="text" style='width:100%px'  id={{form.type_two}} </td>
+              <td colspan = '1'> <input type="text" style='width:100%px'  id={{form.check_penalty_two}} </td>
+              <td colspan = '1'> <input type="text" style='width:100%px'  id={{form.spell_failure_two}} </td>
+              <td colspan = '1'> <input type="text" style='width:100%px'  id={{form.weight_two}} </td>
+              <td colspan = '1'> <input type="text" style='width:100%px'  id={{form.properties_two}} </td>
+            </tr>
+            <tr>
+              <td colspan = '2'> <input type="text" style='width:100%px'  id={{form.ac_items_three}} </td>
+              <td colspan = '1'> <input type="text" style='width:100%px'  id={{form.bonus_three}} </td>
+              <td colspan = '1'> <input type="text" style='width:100%px'  id={{form.type_three}} </td>
+              <td colspan = '1'> <input type="text" style='width:100%px'  id={{form.check_penalty_three}} </td>
+              <td colspan = '1'> <input type="text" style='width:100%px'  id={{form.spell_failure_three}} </td>
+              <td colspan = '1'> <input type="text" style='width:100%px'  id={{form.weight_three}} </td>
+              <td colspan = '1'> <input type="text" style='width:100%px'  id={{form.properties_three}} </td>
+            </tr>
+            <tr>
+              <td colspan = '2'> <input type="text" style='width:100%px'  id={{form.ac_items_four}} </td>
+              <td colspan = '1'> <input type="text" style='width:100%px'  id={{form.bonus_four}} </td>
+              <td colspan = '1'> <input type="text" style='width:100%px'  id={{form.type_four}} </td>
+              <td colspan = '1'> <input type="text" style='width:100%px'  id={{form.check_penalty_four}} </td>
+              <td colspan = '1'> <input type="text" style='width:100%px'  id={{form.spell_failure_four}} </td>
+              <td colspan = '1'> <input type="text" style='width:100%px'  id={{form.weight_four}} </td>
+              <td colspan = '1'> <input type="text" style='width:100%px'  id={{form.properties_four}} </td>
+            </tr>
+            <tr>
+              <td colspan = '2'> <input type="text" style='width:100%px'  id={{form.ac_items_five}} </td>
+              <td colspan = '1'> <input type="text" style='width:100%px'  id={{form.bonus_five}} </td>
+              <td colspan = '1'> <input type="text" style='width:100%px'  id={{form.type_five}} </td>
+              <td colspan = '1'> <input type="text" style='width:100%px'  id={{form.check_penalty_five}} </td>
+              <td colspan = '1'> <input type="text" style='width:100%px'  id={{form.spell_failure_five}} </td>
+              <td colspan = '1'> <input type="text" style='width:100%px'  id={{form.weight_one}} </td>
+              <td colspan = '1'> <input type="text" style='width:100%px'  id={{form.properties_five}} </td>
+            </tr>
+            <tr>
+              <th  colspan = '2' class="table-dark"  scope="row" > ИТОГО </th>
+              <td colspan = '1'> <input type="text" style='width:100%px'  id={{form.bonus_totals}} </td>
+              <td colspan = '1'> <input type="text" style='width:100%px'  id={{form.type_totals}} </td>
+              <td colspan = '1'> <input type="text" style='width:100%px'  id={{form.check_penalty_totals}} </td>
+              <td colspan = '1'> <input type="text" style='width:100%px'  id={{form.spell_failure_totals}} </td>
+              <td colspan = '1'> <input type="text" style='width:100%px'  id={{form.weight_totals}} </td>
+              <td colspan = '1'> <input type="text" style='width:100%px'  id={{form.properties_totals}} </td>
+            </tr>
+            </tbody>
+        </table>
+      </div>
+      
+      <div class='table-responsive' style="max-width:40%; float:left;">
+        <table class="table table-borderless table-hover table-success " >
+          <thead>
+            <tr>
+              <th colspan = '3' class="table-dark" style='text-align:center;' scope="col">СНАРЯЖЕНИЕ</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th colspan = '2' style="width:80%; text-align:center;" scope="col">ПРЕДМЕТ</th>
+              <th colspan = '1' style="width:20%; text-align:center;" scope="col">ВЕС</th>
+            </tr>
+            <tr>
+              <td colspan = '2' > <input type="text" style='width:100%;'   id={{form.equipment_1}} </td>
+              <td colspan = '1'> <input type="text"  style='width:100%;' id={{form.equipment_1_ves}} </td>
+            </tr>
+            <tr>
+              <td colspan = '2' > <input type="text" style='width:100%;'   id={{form.equipment_2}} </td>
+              <td colspan = '1'> <input type="text"  style='width:100%;' id={{form.equipment_2_ves}} </td>
+            </tr>
+            <tr>
+              <td colspan = '2' > <input type="text" style='width:100%;'   id={{form.equipment_3}} </td>
+              <td colspan = '1'> <input type="text"  style='width:100%;' id={{form.equipment_3_ves}} </td>
+            </tr>
+            <tr>
+              <td colspan = '2' > <input type="text" style='width:100%;'   id={{form.equipment_4}} </td>
+              <td colspan = '1'> <input type="text"  style='width:100%;' id={{form.equipment_4_ves}} </td>
+            </tr>
+            <tr>
+              <td colspan = '2' > <input type="text" style='width:100%;'   id={{form.equipment_5}} </td>
+              <td colspan = '1'> <input type="text"  style='width:100%;' id={{form.equipment_5_ves}} </td>
+            </tr>
+            <tr>
+              <td colspan = '2' > <input type="text" style='width:100%;'   id={{form.equipment_6}} </td>
+              <td colspan = '1'> <input type="text"  style='width:100%;' id={{form.equipment_6_ves}} </td>
+            </tr>
+            <tr>
+              <td colspan = '2' > <input type="text" style='width:100%;'   id={{form.equipment_7}} </td>
+              <td colspan = '1'> <input type="text"  style='width:100%;' id={{form.equipment_7_ves}} </td>
+            </tr>
+            <tr>
+              <td colspan = '2' > <input type="text" style='width:100%;'   id={{form.equipment_8}} </td>
+              <td colspan = '1'> <input type="text"  style='width:100%;' id={{form.equipment_8_ves}} </td>
+            </tr>
+            <tr>
+              <td colspan = '2' > <input type="text" style='width:100%;'   id={{form.equipment_9}} </td>
+              <td colspan = '1'> <input type="text"  style='width:100%;' id={{form.equipment_9_ves}} </td>
+            </tr>
+            <tr>
+              <td colspan = '2' > <input type="text" style='width:100%;'   id={{form.equipment_10}} </td>
+              <td colspan = '1'> <input type="text"  style='width:100%;' id={{form.equipment_10_ves}} </td>
+            </tr>
+            <tr>
+              <td colspan = '2' > <input type="text" style='width:100%;'   id={{form.equipment_11}} </td>
+              <td colspan = '1'> <input type="text"  style='width:100%;' id={{form.equipment_11_ves}} </td>
+            </tr>
+            <tr>
+              <td colspan = '2' > <input type="text" style='width:100%;'   id={{form.equipment_12}} </td>
+              <td colspan = '1'> <input type="text"  style='width:100%;' id={{form.equipment_12_ves}} </td>
+            </tr>
+            <tr>
+              <td colspan = '2' > <input type="text" style='width:100%;'   id={{form.equipment_13}} </td>
+              <td colspan = '1'> <input type="text"  style='width:100%;' id={{form.equipment_13_ves}} </td>
+            </tr>
+            <tr>
+              <td colspan = '2' > <input type="text" style='width:100%;'   id={{form.equipment_14}} </td>
+              <td colspan = '1'> <input type="text"  style='width:100%;' id={{form.equipment_14_ves}} </td>
+            </tr>
+            <tr>
+              <td colspan = '2' > <input type="text" style='width:100%;'   id={{form.equipment_15}} </td>
+              <td colspan = '1'> <input type="text"  style='width:100%;' id={{form.equipment_15_ves}} </td>
+            </tr>
+            <tr>
+              <td colspan = '2' > <input type="text" style='width:100%;'   id={{form.equipment_16}} </td>
+              <td colspan = '1'> <input type="text"  style='width:100%;' id={{form.equipment_16_ves}} </td>
+            </tr>
+            <tr>
+              <td colspan = '2' > <input type="text" style='width:100%;'   id={{form.equipment_17}} </td>
+              <td colspan = '1'> <input type="text"  style='width:100%;' id={{form.equipment_17_ves}} </td>
+            </tr>
+            <tr>
+              <td colspan = '2' > <input type="text" style='width:100%;'   id={{form.equipment_18}} </td>
+              <td colspan = '1'> <input type="text"  style='width:100%;' id={{form.equipment_18_ves}} </td>
+            </tr>
+            <tr>
+              <td colspan = '2' > <input type="text" style='width:100%;'   id={{form.equipment_19}} </td>
+              <td colspan = '1'> <input type="text"  style='width:100%;' id={{form.equipment_19_ves}} </td>
+            </tr>
+            <tr>
+              <td colspan = '2' > <input type="text" style='width:100%;'   id={{form.equipment_20}} </td>
+              <td colspan = '1'> <input type="text"  style='width:100%;' id={{form.equipment_20_ves}} </td>
+            </tr>
+            <tr>
+              <td colspan = '2' > <input type="text" style='width:100%;'   id={{form.equipment_21}} </td>
+              <td colspan = '1'> <input type="text"  style='width:100%;' id={{form.equipment_21_ves}} </td>
+            </tr>
+            <tr>
+              <td colspan = '2' > <input type="text" style='width:100%;'   id={{form.equipment_22}} </td>
+              <td colspan = '1'> <input type="text"  style='width:100%;' id={{form.equipment_22_ves}} </td>
+            </tr>
+            <tr>
+              <td colspan = '2' > <input type="text" style='width:100%;'   id={{form.equipment_23}} </td>
+              <td colspan = '1'> <input type="text"  style='width:100%;' id={{form.equipment_23_ves}} </td>
+            </tr>
+            <tr>
+              <td colspan = '2' > <input type="text" style='width:100%;'   id={{form.equipment_24}} </td>
+              <td colspan = '1'> <input type="text"  style='width:100%;' id={{form.equipment_24_ves}} </td>
+            </tr>
+            <tr>
+              <td colspan = '2' > <input type="text" style='width:100%;'   id={{form.equipment_25}} </td>
+              <td colspan = '1'> <input type="text"  style='width:100%;' id={{form.equipment_25_ves}} </td>
+            </tr>
+            <tr>
+              <td colspan = '2' > <input type="text" style='width:100%;'   id={{form.equipment_26}} </td>
+              <td colspan = '1'> <input type="text"  style='width:100%;' id={{form.equipment_26_ves}} </td>
+            </tr>
+            <tr>
+              <th  colspan = '2' class="table-dark"  scope="row" > ИТОГО </th>
+              <td colspan = '1'> <input type="text"  style='width:100%;' id={{form.equipment_total}} </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        
+      </div>
+      <div class='table-responsive' style="max-width:60%; ">
+        <table class="table table-borderless table-hover table-secondary " >
+          <thead>
+            <tr>
+              <th  class="table-dark" style='text-align:center;' scope="col">ЧЕРТЫ</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td> <input type="text" style='width:100%;'   id={{form.feats_1}} </td>
+            </tr>
+            <tr>
+              <td> <input type="text" style='width:100%;'   id={{form.feats_2}} </td>
+            </tr>
+            <tr>
+              <td> <input type="text" style='width:100%;'   id={{form.feats_3}} </td>
+            </tr>
+            <tr>
+              <td> <input type="text" style='width:100%;'   id={{form.feats_4}} </td>
+            </tr>
+            <tr>
+              <td> <input type="text" style='width:100%;'   id={{form.feats_5}} </td>
+            </tr>
+            <tr>
+              <td> <input type="text" style='width:100%;'   id={{form.feats_6}} </td>
+            </tr>
+            <tr>
+              <td> <input type="text" style='width:100%;'   id={{form.feats_7}} </td>
+            </tr>
+            <tr>
+              <td> <input type="text" style='width:100%;'   id={{form.feats_8}} </td>
+            </tr>
+            <tr>
+              <td> <input type="text" style='width:100%;'   id={{form.feats_9}} </td>
+            </tr>
+            <tr>
+              <td> <input type="text" style='width:100%;'   id={{form.feats_10}} </td>
+            </tr>
+            <tr>
+              <td> <input type="text" style='width:100%;'   id={{form.feats_11}} </td>
+            </tr>
+            <tr>
+              <td> <input type="text" style='width:100%;'   id={{form.feats_12}} </td>
+            </tr>
+            <tr>
+              <td> <input type="text" style='width:100%;'   id={{form.feats_13}} </td>
+            </tr>
             
-    
-           
-        
+          </tbody>
+        </table>
+      </div>
+      <div class='table-responsive' style="max-width:60%; ">
+        <table class="table table-borderless table-hover table-secondary " >
+          <thead>
+            <tr>
+              <th  class="table-dark" style='text-align:center;' scope="col">ОСОБЫЕ СПОСОБНОСТИ</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td> <input type="text" style='width:100%;'   id={{form.special_abilities}} </td>
+            </tr>
+            <tr>
+              <td> <input type="text" style='width:100%;'   id={{form.special_abilities_1}} </td>
+            </tr>
+            <tr>
+              <td> <input type="text" style='width:100%;'   id={{form.special_abilities_2}} </td>
+            </tr>
+            <tr>
+              <td> <input type="text" style='width:100%;'   id={{form.special_abilities_3}} </td>
+            </tr>
+            <tr>
+              <td> <input type="text" style='width:100%;'   id={{form.special_abilities_4}} </td>
+            </tr>
+            <tr>
+              <td> <input type="text" style='width:100%;'   id={{form.special_abilities_5}} </td>
+            </tr>
+            <tr>
+              <td> <input type="text" style='width:100%;'   id={{form.special_abilities_6}} </td>
+            </tr>
+            <tr>
+              <td> <input type="text" style='width:100%;'   id={{form.special_abilities_7}} </td>
+            </tr>
+            <tr>
+              <td> <input type="text" style='width:100%;'   id={{form.special_abilities_8}} </td>
+            </tr>
+            <tr>
+              <td> <input type="text" style='width:100%;'   id={{form.special_abilities_9}} </td>
+            </tr>
+            <tr>
+              <td> <input type="text" style='width:100%;'   id={{form.special_abilities_10}} </td>
+            </tr>
+            <tr>
+              <td> <input type="text" style='width:100%;'   id={{form.special_abilities_11}} </td>
+            </tr>
+            <tr>
+              <td> <input type="text" style='width:100%;'   id={{form.special_abilities_12}} </td>
+            </tr>
+            <tr>
+              <td> <input type="text" style='width:100%;'   id={{form.special_abilities_13}} </td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </div>
+      <div class='table-responsive' >
+        <table class="table table-borderless table-hover table-dark " >
+          
+          <tbody>
+            <tr>
+              
+              <td> <br> ЛЁГКАЯ НАГРУЗКА <input type="text" style='width:100%;' id={{form.light_load}} </td>
+              
+              <td> <br> СРЕДНЯ НАГРУЗКА <input type="text" style='width:100%;' id={{form.middle_load}} </td>
+              
+              <td> ТЯЖЁЛАЯ НАГРУЗКА <input type="text" style='width:100%;' id={{form.hight_load}} </td>
+              
+              <td> ПОДНЯТЬ НАД ГОЛОВОЙ <input type="text" style='width:100%;' id={{form.raise_above_head}} </td>
+              
+              <td> ОТОРВАТЬ ОТ ЗЕМЛИ<input type="text" style='width:100%;' id={{form.get_off_the_ground}} </td>
+              
+              <td> ТОЛКАТЬ ИЛИ ВОЛОЧЬ <input type="text" style='width:100%;' id={{form.push_or_drag}} </td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </div>
+      <div class='table-responsive' >
+        <table class="table table-borderless table-hover table-dark " >
+          
+          <tbody>
+            <tr>
+              <th  class="table-dark" style='text-align:center; ' scope="col"> <h5 style='margin: 5% 0% 0% 0% '>ДЕНЬГИ: </h5></th>
+              
+              <td> ММ <input type="text" style='width:100%;' id={{form.money_MM}} </td>
+              <td> СМ <input type="text" style='width:100%;' id={{form.money_CM}} </td>
+              <td> ЗМ <input type="text" style='width:100%;' id={{form.money_3M}} </td>
+              <td> ПМ <input type="text" style='width:100%;' id={{form.money_PM}} </td>
+            </tr>
 
+          </tbody>
+        </table>
+      </div>
+      <div class='table-responsive' >
+        <table class="table table-borderless table-hover table-dark " >
+          
+          <tbody>
+            <tr>
+              <th  class="table-dark" style='text-align:center; ' scope="col"> <h5 style='margin: 1% 0% 0% 0% '>ОПЫТ: </h5></th>
+              <td> <input type="text" style='max-width:100px;' id={{form.experience}} </td>
+              <th  class="table-dark" style='text-align:center; ' scope="col"> <h6 style='margin: 1% 0% 0% 0% '>СЛЕДУЮЩИЙ УРОВЕНЬ: </h6></th>
+              <td> <input type="text" style='max-width:100px;' id={{form.following_experience}} </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+      <div class='table-responsive' style=" float:left; max-width:50%; ">
+        <table class="table table-borderless table-hover table-secondary " >
+          <thead>
+            <tr>
+              <th colspan = '5' style="text-align:center;"class="table-dark" scope="col">ЗАКЛИНАНИЯ</th>
+            </tr>
+          </thead>
+          <thead>
+            <tr>
+              <th colspan = '1'  scope="col"> <small>ИЗВЕСТНЫЕ ЗАКЛИНАНИЯ</th>
+              <th colspan = '1'  scope="col"> <small>СП ИСПЫТАНИЯ</th>
+              <th colspan = '1'  scope="col"> <small>КРУГ</th>
+              <th colspan = '1'  scope="col"> <small>ЗАКЛИНАНИЙ В ДЕНЬ</th>
+              <th colspan = '1'  scope="col"> <small> ДОП. ЗАКЛИНАНИЯ </small></th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td> <input type="text" style='width:100%;'   id={{form.spells_known_lvl0}} </td>
+              <td> <input type="text" style='width:100%;'   id={{form.spell_save_dc_lvl0}} </td>
+              <td>  <text> 0 </text> </td>
+              <td> <input type="text" style='width:100%;'   id={{form.spells_per_day_lvl0}} </td>
+              <td> <input type="text" style='width:100%;'   id={{form.spells_bonus_lvl0}} </td>
+            </tr>
+            <tr>
+              <td> <input type="text" style='width:100%;'   id={{form.spells_known_lvl1}} </td>
+              <td> <input type="text" style='width:100%;'   id={{form.spell_save_dc_lvl1}} </td>
+              <td>  <text> 1 </text> </td>
+              <td> <input type="text" style='width:100%;'   id={{form.spells_per_day_lvl1}} </td>
+              <td> <input type="text" style='width:100%;'   id={{form.spells_bonus_lvl1}} </td>
+            </tr>
+            <tr>
+              <td> <input type="text" style='width:100%;'   id={{form.spells_known_lvl2}} </td>
+              <td> <input type="text" style='width:100%;'   id={{form.spell_save_dc_lvl2}} </td>
+              <td>  <text> 2 </text> </td>
+              <td> <input type="text" style='width:100%;'   id={{form.spells_per_day_lvl2}} </td>
+              <td> <input type="text" style='width:100%;'   id={{form.spells_bonus_lvl2}} </td>
+            </tr>
+            <tr>
+              <td> <input type="text" style='width:100%;'   id={{form.spells_known_lvl3}} </td>
+              <td> <input type="text" style='width:100%;'   id={{form.spell_save_dc_lvl3}} </td>
+              <td>  <text> 3 </text> </td>
+              <td> <input type="text" style='width:100%;'   id={{form.spells_per_day_lvl3}} </td>
+              <td> <input type="text" style='width:100%;'   id={{form.spells_bonus_lvl3}} </td>
+            </tr>
+            <tr>
+              <td> <input type="text" style='width:100%;'   id={{form.spells_known_lvl4}} </td>
+              <td> <input type="text" style='width:100%;'   id={{form.spell_save_dc_lvl4}} </td>
+              <td>  <text> 4 </text> </td>
+              <td> <input type="text" style='width:100%;'   id={{form.spells_per_day_lvl4}} </td>
+              <td> <input type="text" style='width:100%;'   id={{form.spells_bonus_lvl4}} </td>
+            </tr>
+            <tr>
+              <td> <input type="text" style='width:100%;'   id={{form.spells_known_lvl5}} </td>
+              <td> <input type="text" style='width:100%;'   id={{form.spell_save_dc_lvl5}} </td>
+              <td>  <text> 5 </text> </td>
+              <td> <input type="text" style='width:100%;'   id={{form.spells_per_day_lvl5}} </td>
+              <td> <input type="text" style='width:100%;'   id={{form.spells_bonus_lvl5}} </td>
+            </tr>
+            <tr>
+              <td> <input type="text" style='width:100%;'   id={{form.spells_known_lvl6}} </td>
+              <td> <input type="text" style='width:100%;'   id={{form.spell_save_dc_lvl6}} </td>
+              <td>  <text> 6 </text> </td>
+              <td> <input type="text" style='width:100%;'   id={{form.spells_per_day_lvl6}} </td>
+              <td> <input type="text" style='width:100%;'   id={{form.spells_bonus_lvl6}} </td>
+            </tr>
+            <tr>
+              <td> <input type="text" style='width:100%;'   id={{form.spells_known_lvl7}} </td>
+              <td> <input type="text" style='width:100%;'   id={{form.spell_save_dc_lvl7}} </td>
+              <td>  <text> 7 </text> </td>
+              <td> <input type="text" style='width:100%;'   id={{form.spells_per_day_lvl7}} </td>
+              <td> <input type="text" style='width:100%;'   id={{form.spells_bonus_lvl7}} </td>
+            </tr>
+            <tr>
+              <td> <input type="text" style='width:100%;'   id={{form.spells_known_lvl8}} </td>
+              <td> <input type="text" style='width:100%;'   id={{form.spell_save_dc_lvl8}} </td>
+              <td>  <text> 8 </text> </td>
+              <td> <input type="text" style='width:100%;'   id={{form.spells_per_day_lvl8}} </td>
+              <td> <input type="text" style='width:100%;'   id={{form.spells_bonus_lvl8}} </td>
+            </tr>
+            <tr>
+              <td> <input type="text" style='width:100%;'   id={{form.spells_known_lvl9}} </td>
+              <td> <input type="text" style='width:100%;'   id={{form.spell_save_dc_lvl9}} </td>
+              <td>  <text> 9 </text> </td>
+              <td> <input type="text" style='width:100%;'   id={{form.spells_per_day_lvl9}} </td>
+              <td> <input type="text" style='width:100%;'   id={{form.spells_bonus_lvl9}} </td>
+            </tr>
+            <tr> <td colspan = '5'> <input type="text" style='width:100%; ' placeholder='МОДИФИКАТОР ОБСТОЯТЕЛЬСТВ' id={{form.conditional_modifiers}} </td> </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class='table-responsive' style="width:49%; float: right;   ">
+        <table class="table table-borderless table-hover table-info " >
+          <thead>
+            <tr>
+              <th colspan = '10' style="text-align:center;"class="table" scope="col">  СФЕРЫ/СФЕРЫ СПЕЦИАЛИЗАЦИИ В ШКОЛЕ </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr> <td  colspan = '1'>  <text> 0 </text> </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td>  </tr> 
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.School_of_Incarnation_1}} </td> </tr>
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.School_of_Incarnation_2}} </td> </tr>
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.School_of_Incarnation_3}} </td> </tr>
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.School_of_Incarnation_4}} </td> </tr>
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.School_of_Incarnation_5}} </td> </tr>
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.School_of_Incarnation_6}} </td> </tr>
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.School_of_Incarnation_7}} </td> </tr>
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.School_of_Incarnation_8}} </td> </tr>
+
+            <tr> <td colspan = '1'>  <text> 1 </text> </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td>  </tr> 
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.School_of_illusion_1}} </td> </tr>
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.School_of_illusion_2}} </td> </tr>
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.School_of_illusion_3}} </td> </tr>
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.School_of_illusion_4}} </td> </tr>
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.School_of_illusion_5}} </td> </tr>
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.School_of_illusion_6}} </td> </tr>
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.School_of_illusion_7}} </td> </tr>
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.School_of_illusion_8}} </td> </tr>
+
+            <tr> <td colspan = '1'>  <text> 2 </text> </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td>  </tr> 
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.School_of_Necromancy_1}} </td> </tr>
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.School_of_Necromancy_2}} </td> </tr>
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.School_of_Necromancy_3}} </td> </tr>
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.School_of_Necromancy_4}} </td> </tr>
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.School_of_Necromancy_5}} </td> </tr>
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.School_of_Necromancy_6}} </td> </tr>
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.School_of_Necromancy_7}} </td> </tr>
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.School_of_Necromancy_8}} </td> </tr>
+
+            <tr> <td colspan = '1'>  <text> 3 </text> </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td>  </tr> 
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.School_of_charm_1}} </td> </tr>
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.School_of_charm_2}} </td> </tr>
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.School_of_charm_3}} </td> </tr>
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.School_of_charm_4}} </td> </tr>
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.School_of_charm_5}} </td> </tr>
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.School_of_charm_6}} </td> </tr>
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.School_of_charm_7}} </td> </tr>
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.School_of_charm_8}} </td> </tr>
+
+            <tr> <td colspan = '1'>  <text> 4 </text> </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td>  </tr> 
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.School_of_transformation_1}} </td> </tr>
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.School_of_transformation_2}} </td> </tr>
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.School_of_transformation_3}} </td> </tr>
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.School_of_transformation_4}} </td> </tr>
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.School_of_transformation_5}} </td> </tr>
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.School_of_transformation_6}} </td> </tr>
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.School_of_transformation_7}} </td> </tr>
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.School_of_transformation_8}} </td> </tr>
+
+            <tr> <td colspan = '1'>  <text> 5 </text> </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td>  </tr> 
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.Obstruction_school_1}} </td> </tr>
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.Obstruction_school_2}} </td> </tr>
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.Obstruction_school_3}} </td> </tr>
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.Obstruction_school_4}} </td> </tr>
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.Obstruction_school_5}} </td> </tr>
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.Obstruction_school_6}} </td> </tr>
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.Obstruction_school_7}} </td> </tr>
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.Obstruction_school_8}} </td> </tr>
+
+            <tr> <td colspan = '1'>  <text> 6 </text> </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td> <td colspan = '1'> <input type='checkbox' </td>  </tr> 
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.School_of_Universalism_1}} </td> </tr>
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.School_of_Universalism_2}} </td> </tr>
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.School_of_Universalism_3}} </td> </tr>
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.School_of_Universalism_4}} </td> </tr>
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.School_of_Universalism_5}} </td> </tr>
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.School_of_Universalism_6}} </td> </tr>
+            <tr> <td  colspan = '10'> <input type="text" style='width:100%; height:20px;'  id={{form.School_of_Universalism_7}} </td> </tr>
+            <tr> <td  style='padding:0px;' colspan = '10'> <input type="text" style='width:100%; height:20px; padding:0px;'  id={{form.School_of_Universalism_8}} </td> </tr>
+
+          </tbody>
+        </table>
+      </div>
+      
+      
+</div>
 <button style="position:relative; top:-px;">Сохранить</button> 
-   
-
-</body>
-</html>
+{% endblock %}
